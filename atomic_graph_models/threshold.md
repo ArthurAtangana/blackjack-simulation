@@ -3,16 +3,15 @@
 ## X - Inputs
 The inputs are the values that are intended to be compared with the internal threshold value. 
 The max is 30 in the case that the hand has 20, and gets a 10 value card.
-$$ X = \{v\} \quad 
-v \in \mathbb{N} \cap [1, 30]$$
+$$ X = x \in \mathbb{N} \cap [1, 30]$$
 
 ## S - States
 Threshold states are tuples composed of two values: (t, v). t is the threshold value set by the component, static. 
-v is the comparison value it receives as an input. Their domain is specified as follows:
+v is the comparison value it receives as an input (+0 for the idle state). Their domain is specified as follows:
 
 $$ S = \{(t,v)\} $$
 $$ t \in \mathbb{N} \cap [1, 21]$$
-$$ v \in \mathbb{N} \cap [1, 30]$$
+$$ v \in X \cup{0}$$
 
 ## Y - Outputs
 Decisions to take, based on the comparison between the threshold and input value (see output function).
@@ -44,7 +43,7 @@ Ignore when v = 0, infinite ta. When the value meets the threshold (or above), t
 Otherwise, keep hitting (HIT).
 
 $$ \begin{align}
-\lambda =\ & \{ if  &t > v & \quad then\ HIT \\
-&\ else \ if  &v > 21 & \quad then \ BUST \\
+\lambda(s) =\ & \{ if  &s_t > s_v & \quad then\ HIT \\
+&\ if  &s_v > 21 & \quad then \ BUST \\
 &\ else && \quad then \ STAND
 \end{align}$$ 
