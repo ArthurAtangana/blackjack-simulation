@@ -1,7 +1,7 @@
 # Hand Atomic Model
 
 ## X - Inputs
-The possible cards that can come into the hand:
+The possible card ranks that can come into the hand:
 $$X = \{A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K\}$$
 
 ## S - States
