@@ -1,0 +1,13 @@
+{ "class": "GraphLinksModel",
+  "copiesArrays": true,
+  "copiesArrayObjects": true,
+  "linkFromPortIdProperty": "fromPort",
+  "linkToPortIdProperty": "toPort",
+  "nodeDataArray": [
+{"text":"Idle","figure":"Ellipse","size":"85 85","fill":"white","key":-1,"loc":"-290 -370"},
+{"text":"Compare Value against Threshold","figure":"Ellipse","size":"90 92","fill":"white","key":-2,"loc":"-70 -360"}
+],
+  "linkDataArray": [
+{"from":-1,"to":-2,"fromPort":"T","toPort":"T","points":[-290,-412.5,-290,-422.5,-70,-422.5,-70,-419.25,-70,-416,-70,-406],"label":"value_in?value"},
+{"points":[-70,-314,-70,-304,-290,-304,-290,-310.75,-290,-317.5,-290,-327.5],"dash_array":[6,3],"from":-2,"to":-1,"fromPort":"B","toPort":"B","label":"decision_out!decision"}
+]}

@@ -1,0 +1,16 @@
+{ "class": "GraphLinksModel",
+  "copiesArrays": true,
+  "copiesArrayObjects": true,
+  "linkFromPortIdProperty": "fromPort",
+  "linkToPortIdProperty": "toPort",
+  "nodeDataArray": [
+{"text":"Idle","figure":"Ellipse","size":"85 85","fill":"white","key":-1,"loc":"-290 -370"},
+{"text":"Convert  Card to Numerical Value then add to Stored Value.","figure":"Ellipse","size":"113 105","fill":"white","key":-4,"loc":"-40 -370"},
+{"text":"Reset Stored Value","figure":"Ellipse","size":"85 85","fill":"white","key":-6,"loc":"-550 -370"}
+],
+  "linkDataArray": [
+{"from":-1,"to":-4,"fromPort":"","toPort":"","points":[-247.5,-370,-237.5,-370,-172,-370,-172,-370,-106.5,-370,-96.5,-370],"label":"card_in?card"},
+{"points":[-40,-317.5,-40,-307.5,-290,-307.5,-290,-312.5,-290,-317.5,-290,-327.5],"dash_array":[6,3],"from":-4,"to":-1,"label":"value_out!stored_value","fromPort":"B","toPort":"B"},
+{"points":[-332.5,-370,-342.5,-370,-420,-370,-420,-370,-497.5,-370,-507.5,-370],"color":"black","from":-1,"to":-6,"fromPort":"L","toPort":"R","label":"reset_in?reset"},
+{"points":[-550,-412.5,-550,-422.5,-550,-427.07751136356495,-290,-427.07751136356495,-290,-422.5,-290,-412.5],"dash_array":[6,3],"from":-6,"to":-1,"label":"update_out!updated","fromPort":"T","toPort":"T"}
+]}
