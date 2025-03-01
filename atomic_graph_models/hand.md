@@ -1,4 +1,5 @@
 # Hand Atomic Model
+![hand model](hand.png)
 
 ## X - Inputs
 The possible card ranks that can come into the hand:

@@ -1,4 +1,5 @@
 # Threshold DEVS Formal Specification
+![threshold model](threshold.png)
 
 ## X - Inputs
 The inputs are the values that are intended to be compared with the internal threshold value. 
