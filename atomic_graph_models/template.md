@@ -1,7 +1,7 @@
 # Atomic Model Name
 
 ## X - Inputs
-_(Allows space for rationale if needed, or a bullet point direct description)_
+_(Allows space for rationale if needed, or a direct description, ex: {0, 1})_
 ## S - States
 
 ## Y - Outputs
