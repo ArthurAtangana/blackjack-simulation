@@ -1,20 +1,22 @@
 # Threshold DEVS Formal Specification
 
 ## X - Inputs
-The inputs are the values that are intended to be compared with the internal threshold value.
+The inputs are the values that are intended to be compared with the internal threshold value. 
+The max is 30 in the case that the hand has 20, and gets a 10 value card.
 $$ X = \{v\} \quad 
-v \in \mathbb{N} \cap [1, 21]$$
+v \in \mathbb{N} \cap [1, 30]$$
 
 ## S - States
 Threshold states are tuples composed of two values: (t, v). t is the threshold value set by the component, static. 
 v is the comparison value it receives as an input. Their domain is specified as follows:
 
-$$ S = \{(t,v)\} \quad
- t, v \in \mathbb{N} \cap [1, 21]$$
+$$ S = \{(t,v)\} $$
+$$ t \in \mathbb{N} \cap [1, 21]$$
+$$ v \in \mathbb{N} \cap [1, 30]$$
 
 ## Y - Outputs
 Decisions to take, based on the comparison between the threshold and input value (see output function).
-$$ Y = \{HIT, STAND\} $$
+$$ Y = \{HIT, STAND, BUST\} $$
 
 ## $\delta_{int}$ - Internal transitions
 Ignore when v = 0, infinite ta. The value needs to reset to 0 everytime it is processed:
@@ -29,10 +31,11 @@ Note: $s_t$ refers to the threshold value component of the current state.
 
 ## ta - Time advance function
 There are two state categories the time advance cares about: There is an input to evaluate, or there isn't. 
-If there is, take a decision (think time, around 0.1 seconds), otherwise, do nothing.
+If there is, take a decision (think time, around 0.1 seconds), otherwise, do nothing. 
+Note: "_" refers to any value (don't care value), we do not need this value to evaluate ta.
 
 ### s = (_, 0)
-ta = inf
+ta = infinite
 ### s != (_, 0)
 ta = think_time = 0.1s + variation
 
@@ -40,4 +43,8 @@ ta = think_time = 0.1s + variation
 Ignore when v = 0, infinite ta. When the value meets the threshold (or above), take the decision to STAND. 
 Otherwise, keep hitting (HIT).
 
-$$ \lambda = \{ if \quad t > v \quad HIT \quad else \quad STAND\}$$  
+$$ \begin{align}
+\lambda =\ & \{ if  &t > v & \quad then\ HIT \\
+&\ else \ if  &v > 21 & \quad then \ BUST \\
+&\ else && \quad then \ STAND
+\end{align}$$ 
