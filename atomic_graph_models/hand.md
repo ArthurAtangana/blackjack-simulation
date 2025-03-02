@@ -6,17 +6,17 @@ The possible card ranks that can come into the hand:
 $$X = \{A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K\}$$
 
 ## S - States
-The max is 30 in the case that the hand has 20 (max value before winning or busting), and gets a 10 value card.
-v is the stored card value so far, c is the card received plus 0 if no new card has arrived yet (idle).
+States are composed of a stored value (v), and a new unprocessed card (c). 
+At any point, the actual hand value is v+c, but it takes some time to calculate and store the value of c.
 $$ S = \{(v, c)\} \quad$$
-$$v \in \mathbb{N} \cap [1, 30]$$
+$$v \in \mathbb{N}$$
 $$c \in X \cup\{0\}$$
 
 ## Y - Outputs
 The output is $s'_v$ (see output function / internal transition), 
 the addition of the card value and the current stored. It follows that it has the same domain as v.
 $$ Y = \{(v)\} \quad
-v \in \mathbb{N} \cap [1, 30]$$
+v \in \mathbb{N}$$
 
 ## $\delta$<sub>int</sub> - Internal transitions
 Ignore when c = 0, infinite ta. The value needs to reset to 0 everytime it is processed:

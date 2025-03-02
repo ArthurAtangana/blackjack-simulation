@@ -4,7 +4,7 @@
 ## X - Inputs
 The inputs are the values that are intended to be compared with the internal threshold value. 
 The max is 30 in the case that the hand has 20, and gets a 10 value card.
-$$ X = x \in \mathbb{N} \cap [1, 30]$$
+$$ X = x \in \mathbb{N}$$
 
 ## S - States
 Threshold states are tuples composed of two values: (t, v). t is the threshold value set by the component, static. 
