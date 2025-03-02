@@ -10,13 +10,15 @@ $$ X = x \in \mathbb{N} \cap [1, 30]$$
 Threshold states are tuples composed of two values: (t, v). t is the threshold value set by the component, static. 
 v is the comparison value it receives as an input (+0 for the idle state). Their domain is specified as follows:
 
-$$ S = \{(t,v,i)\} $$
+$$ S = \{(t,v)\} $$
 $$ t \in \mathbb{N} \cap [1, 21]$$
 $$ v \in X \cup\{0\}$$
 
 ## Y - Outputs
 Decisions to take, based on the comparison between the threshold and input value (see output function).
-$$ Y = \{HIT, STAND, BUST\} $$
+Note: STAND appends the player score at the end which shares the range of $v$.
+$$ Y = \{HIT, STAND\_v\} $$
+$$ v \in X \cup\{0\}$$
 
 ## $\delta_{int}$ - Internal transitions
 Ignore when v = 0, infinite ta. The value needs to reset to 0 everytime it is processed:
@@ -45,6 +47,5 @@ Otherwise, keep hitting (HIT).
 
 $$ \begin{align}
 \lambda(s) =\ & \{ if  &s_t > s_v & \quad then\ HIT \\
-&\ if  &s_v > 21 & \quad then \ BUST \\
-&\ else && \quad then \ STAND
+&\ else && \quad then \ STAND\_v
 \end{align}$$ 
