@@ -10,7 +10,7 @@ The max is 30 in the case that the hand has 20 (max value before winning or bust
 v is the stored card value so far, c is the card received plus 0 if no new card has arrived yet (idle).
 $$ S = \{(v, c)\} \quad$$
 $$v \in \mathbb{N} \cap [1, 30]$$
-$$c \in X \cup{0}$$
+$$c \in X \cup\{0\}$$
 
 ## Y - Outputs
 The output is $s'_v$ (see output function / internal transition), 

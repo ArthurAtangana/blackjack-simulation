@@ -10,9 +10,9 @@ $$ X = x \in \mathbb{N} \cap [1, 30]$$
 Threshold states are tuples composed of two values: (t, v). t is the threshold value set by the component, static. 
 v is the comparison value it receives as an input (+0 for the idle state). Their domain is specified as follows:
 
-$$ S = \{(t,v)\} $$
+$$ S = \{(t,v,i)\} $$
 $$ t \in \mathbb{N} \cap [1, 21]$$
-$$ v \in X \cup{0}$$
+$$ v \in X \cup\{0\}$$
 
 ## Y - Outputs
 Decisions to take, based on the comparison between the threshold and input value (see output function).
