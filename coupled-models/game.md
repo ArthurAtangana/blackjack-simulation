@@ -26,4 +26,9 @@
 - It's better to take the decision of the previous turn first before processing the updated hand.
 - That said, you should never be drawing before your turn is ended so if this happens in simulation something has gone wrong already.
 
-SELECT: ({controller, deck}) = deck
+SELECT: 
+- {controller, deck} = deck
+- {controller, players} = players
+- {deck, players} = players
+- {controller, players} = players
+- {controller, players, deck} = players
