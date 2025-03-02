@@ -1,7 +1,13 @@
 # Experimentation Strategy
 ## Game Model
+The game is responsible for starting a game and getting a winner
+- Start a game
+- Mock deck to ensure:
+   * Dealer Win
+   * Challenger Win
+   * Tie
 ## Deck Model
-- Receive a shuffle input -> the deck should be shuffled -> output a shuffled/updated msg.
+- Receive a shuffle input -> the deck should be shuffled -> output HIT.
 - Receive a draw(player) input -> the deck should draw a card to a specific player -> deck = deck - 1
 ## Controller Model
 
