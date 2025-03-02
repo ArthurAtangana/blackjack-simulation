@@ -1,16 +1,29 @@
 # Game Coupled Model
-![img](game.png)
+![game](game.png)
 ## X - Input
-
+{start}
 ## Y - Output
+{win,lose,tie}
 
 ## M - Set of Component Models
+{controller, deck, players}
 
 ## EIC - External Input Couplings
+{(game.start,controller.start)}
 
 ## EOC - External Output Couplings
+{(controller.outcome,game.out)}
 
 ## IC - Internal Couplings
+{
+ (controller.cmd,deck.cmd),
+ (deck.card_(player),player.card_(player)),
+ (deck.HIT,controller.HIT),
+ (players.decision,controller.decision),
+}
 
-## Select
+## Select:
+- It's better to take the decision of the previous turn first before processing the updated hand.
+- That said, you should never be drawing before your turn is ended so if this happens in simulation something has gone wrong already.
 
+SELECT: ({controller, deck}) = deck
