@@ -28,8 +28,20 @@ $$ O = \{WIN, TIE, LOSS\}$$
 $$ Y = C \cup O $$
 
 ## $\delta$<sub>int</sub> - Internal transitions
+The internal transition behaviour is strongly dependent on the value in $s_4$, 
+therefore we define $\delta_{int}$ based on it. Note, $s_4$ = IDLE is ignored because of its infinite ta value.
+Note: $v$ in $STAND\_v$ is the encoded score value when the player stands, it is assumed it can be parsed and stored.
 
-$$ \delta_{int}(s)= (\lambda(s),\ 0)$$
+### Bust Checker
+Small helper function to short-circuit game in the case of a BUST. Returns HIT to continue the game if no bust, 
+CHECK_WINNER otherwise.
+$$check\_bust(v) = \{if\ v > 21\ then\ CHECK\_WINNER \ else\ HIT\}$$
+
+### $\delta_{int}$
+$$ \delta_{int}(\_, \_, \_, START) = (CHALLENGER, 0, 0, IDLE)$$
+$$ \delta_{int}(s1, s2, s3, HIT) = (s1, s2, s3, IDLE)$$
+$$ \delta_{int}(\_, \_, \_, STAND\_v) = \{if\ s1 = CHALLENGER\ then\ (DEALER, v, s3, check\_bust(v))\ else\ (s1, s2, v, CHECK\_WINNER)\}$$
+$$ \delta_{int}(\_, \_, \_, CHECK\_WINNER) = (s1, s2, s3, IDLE)$$
 
 ## $\delta$<sub>ext</sub> - External transitions
 External inputs simply get stored directly in s4, its purpose is to store the last input. 
