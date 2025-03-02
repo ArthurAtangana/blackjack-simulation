@@ -1,0 +1,13 @@
+{ "class": "GraphLinksModel",
+  "copiesArrays": true,
+  "copiesArrayObjects": true,
+  "linkFromPortIdProperty": "fromPort",
+  "linkToPortIdProperty": "toPort",
+  "nodeDataArray": [
+{"text":"Idle","figure":"Ellipse","size":"85 85","fill":"white","key":-1,"loc":"-290 -370"},
+{"text":"Convert  Card to Numerical Value then add to Stored Value.","figure":"Ellipse","size":"113 105","fill":"white","key":-4,"loc":"-40 -370"}
+],
+  "linkDataArray": [
+{"from":-1,"to":-4,"fromPort":"T","toPort":"T","points":[-290,-412.5,-290,-422.5,-290,-432.5,-165,-432.5,-40,-432.5,-40,-422.5],"label":"card_in?card"},
+{"points":[-40,-317.5,-40,-307.5,-290,-307.5,-290,-312.5,-290,-317.5,-290,-327.5],"dash_array":[6,3],"from":-4,"to":-1,"label":"value_out!stored_value","fromPort":"B","toPort":"B"}
+]}

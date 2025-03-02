@@ -1,0 +1,16 @@
+{ "class": "GraphLinksModel",
+  "copiesArrays": true,
+  "copiesArrayObjects": true,
+  "linkFromPortIdProperty": "fromPort",
+  "linkToPortIdProperty": "toPort",
+  "nodeDataArray": [
+{"text":"idle","figure":"Ellipse","size":"82 85","fill":"white","key":-1,"loc":"-120 -130"},
+{"text":"shuffles","figure":"Ellipse","size":"85 85","fill":"white","key":-6,"loc":"150 -130"},
+{"text":"draw\ndeck_cards-1","figure":"Ellipse","size":"85 85","fill":"white","key":-3,"loc":"-410 -130"}
+],
+  "linkDataArray": [
+{"from":-1,"to":-6,"fromPort":"T","toPort":"T","points":[-120,-172.5,-120,-182.5,150,-182.5,150,-182.5,150,-182.5,150,-172.5],"label":"cmd_in?shuffle"},
+{"from":-1,"to":-3,"fromPort":"T","toPort":"T","points":[-120,-172.5,-120,-182.5,-410,-182.5,-410,-182.5,-410,-182.5,-410,-172.5],"label":"cmd_in?draw"},
+{"points":[150,-87.5,150,-77.5,-120,-77.5,-120,-77.5,-120,-77.5,-120,-87.5],"dash_array":[6,3],"from":-6,"to":-1,"toPort":"B","fromPort":"B","label":"update_out!updated"},
+{"points":[-410,-87.5,-410,-77.5,-120,-77.5,-120,-77.5,-120,-77.5,-120,-87.5],"dash_array":[6,3],"from":-3,"to":-1,"toPort":"B","fromPort":"B","label":"card_out!card"}
+]}
