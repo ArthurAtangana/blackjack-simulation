@@ -1,4 +1,6 @@
 ### C++ ###
+build/
+bin/
 # Prerequisites
 *.d
 
