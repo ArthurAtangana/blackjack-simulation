@@ -46,9 +46,8 @@ class threshold: public Atomic<thresholdState> {
     void externalTransition(thresholdState& state, double e) const override {
         // we can read input messages from a port like this:
         if(!valueIn->empty()){
-            for (const auto& x: valueIn -> getBag()) {
-                state.comparisonValue = x;
-            }
+            const int lastInput = (valueIn -> getBag()).back();
+            state.comparisonValue = lastInput;
         }
         state.sigma = 0.1; // Not sure how to add variation yet.
     }

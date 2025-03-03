@@ -1,0 +1,74 @@
+#ifndef MOCK_CONTROLLER_HPP
+#define MOCK_CONTROLLER_HPP
+
+using namespace cadmium;
+
+#include <random>
+#include <iostream>
+#include "cadmium/modeling/devs/atomic.hpp"
+#include "commands.hpp"
+
+struct mockControllerState {
+    //State variables
+    std::vector<Commands> mockOutput;
+
+    explicit mockControllerState() {
+        // TODO: Initialize mockOutput
+        mockOutput.push_back(Commands::DRAW_CHALLENGER);
+        mockOutput.push_back(Commands::DRAW_DEALER);
+        mockOutput.push_back(Commands::SHUFFLE);
+    }
+};
+
+std::ostream& operator<<(std::ostream& out, const mockControllerState& state) {
+    out << "mockOutput: [";
+    for (const auto& cmd : state.mockOutput) {
+        out << cmd << ", ";  // Assumes `Commands` has an `operator<<`
+    }
+    out << "]";
+    return out;
+}
+
+
+class mockController : public Atomic<mockControllerState> {
+    //Declare your ports here
+    public:
+    Port<Commands> mockOut;
+
+    mockController(const std::string id) : Atomic<mockControllerState>(id, mockControllerState()) {
+        //Constructor of your atomic model. Initialize ports here.
+        //Initialize output ports
+        mockOut = addOutPort<Commands>("mockOut");
+    }
+
+    // inernal transition
+    void internalTransition(mockControllerState& state) const override {
+        //your internal transition function goes here
+        if (!state.mockOutput.empty()){
+            state.mockOutput.pop_back();
+        }
+    }
+
+    // external transition
+    void externalTransition(mockControllerState& state, double e) const override {
+        // Should never trigger, no input ports.
+        return;
+    }
+    
+    
+    // output function
+    void output(const mockControllerState& state) const override {
+        //your output function goes here
+        mockOut->addMessage(state.mockOutput.back());
+    }
+
+    // time_advance function
+    [[nodiscard]] double timeAdvance(const mockControllerState& state) const override {     
+        // 11 seconds between all inputs, highest TA in system is 10. Simple way to avoid race conditions
+        return 11; // Should be based on a constant defined somewhere maybe.
+    }
+};
+
+
+#endif
+
