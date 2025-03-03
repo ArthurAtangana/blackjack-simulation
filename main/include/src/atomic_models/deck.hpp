@@ -41,7 +41,7 @@ struct deckState {
     std::vector<Cards> cards;
 
     explicit deckState(): state(DeckActions::IDLE) {
-        for (int i = 0; i < static_cast<int>(Cards::ACE); ++i) {
+        for (int i = 0; i < static_cast<int>(Cards::ACE)+1; ++i) {
             for (int j = 0; j < 4; ++j) {  // Add each element 4 times
                 cards.push_back(static_cast<Cards>(i));
             }
@@ -60,7 +60,7 @@ std::ostream& operator<<(std::ostream &out, const deckState& state) {
     }
     out << ", cards remaining: " << state.cards.size() << "\n";
     out << "Current Order: [";
-    for (int c: state.cards) {
+    for (Cards c: state.cards) {
         out << c << ",";
     }
     out << "]\n";
