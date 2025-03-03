@@ -3,8 +3,8 @@
 
 #include "cadmium/modeling/devs/coupled.hpp"
 #include "cadmium/modeling/devs/atomic.hpp"
-#include "mock_hand.hpp"
-#include "threshold.hpp"
+#include "include/test/mock_models/mock_hand.hpp"
+#include "include/src/atomic_models/threshold.hpp"
 
 class ThresholdTest: public cadmium::Coupled {
 public:

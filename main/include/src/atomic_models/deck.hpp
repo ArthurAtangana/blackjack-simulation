@@ -6,7 +6,7 @@ using namespace cadmium;
 #include <random>
 #include <iostream>
 #include "cadmium/modeling/devs/atomic.hpp"
-#include "commands.hpp"
+#include "include/src/shared_data/commands.hpp"
 
 enum class DeckActions {
     IDLE,
