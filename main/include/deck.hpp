@@ -56,30 +56,26 @@ std::ostream& operator<<(std::ostream &out, const deckState& state) {
         case DeckActions::IDLE: out << "IDLE"; break;
     }
     out << ", cards remaining: " << state.cards.size() << "\n";
-    if (state.state == DeckActions::SHUFFLE) {
-        out << "Current Order: ";
-        for (int c: state.cards) {
-            out << c << ",";
-        }
-        out << "]\n";
+    out << "Current Order: [";
+    for (int c: state.cards) {
+        out << c << ",";
     }
+    out << "]\n";
     return out;
 }
 #endif
 
-class deck_model : public Atomic<deckState> {
+class deck : public Atomic<deckState> {
     //Declare your ports here
     public:
-    Port<DeckActions> shuffleInPort;
-    Port<DeckActions> drawInPort;
+    Port<Commands> inPort;
     Port<cardOut> cardOutPort;
     Port<Commands> hitOutPort;
 
-    deck_model(const std::string id) : Atomic<deckState>(id, deckState()) {
+    deck(const std::string id) : Atomic<deckState>(id, deckState()) {
         //Constructor of your atomic model. Initialize ports here.
         //Initialize input ports
-        shuffleInPort = addInPort<DeckActions>("shuffleInPort");
-        drawInPort = addInPort<DeckActions>("drawInPort");
+        inPort = addInPort<Commands>("inPort");
 
         //Initialize output ports
         cardOutPort = addOutPort<cardOut>("cardOutPort");
@@ -108,22 +104,12 @@ class deck_model : public Atomic<deckState> {
     // external transition
     void externalTransition(deckState& state, double e) const override {
         //your external transition function hoes here
-        std::vector<DeckActions> drawInPortMsg = drawInPort->getBag();
-        std::vector<DeckActions> shuffleInPortMsg = shuffleInPort->getBag();
-        if (!drawInPortMsg.empty() && drawInPortMsg.back()== DeckActions::DRAW_DEALER){
-            if (!state.cards.empty()){
-                state.state = DeckActions::DRAW_DEALER;
-            }
-        }
-        else if (!drawInPortMsg.empty() && drawInPortMsg.back()== DeckActions::DRAW_CHALLENGER){
-            if (!state.cards.empty()){
-                state.state = DeckActions::DRAW_CHALLENGER;
-            }
-        }
-        //if shuffle, shuffle deck and go idle
-        else if (!shuffleInPortMsg.empty()) {
-            if (!state.cards.empty()){
-                state.state = DeckActions::SHUFFLE;
+        std::vector<Commands> inPortMsg = inPort->getBag();
+        if (!inPortMsg.empty()){
+            switch (inPortMsg.back()) {
+                case Commands::DRAW_CHALLENGER: state.state = DeckActions::DRAW_CHALLENGER; break;
+                case Commands::DRAW_DEALER: state.state = DeckActions::DRAW_DEALER; break;
+                case Commands::SHUFFLE: state.state = DeckActions::SHUFFLE; break;
             }
         }
     }
@@ -148,10 +134,10 @@ class deck_model : public Atomic<deckState> {
     // time_advance function
     [[nodiscard]] double timeAdvance(const deckState& state) const override {     
         switch (state.state) {
-            case DeckActions::DRAW_CHALLENGER: return 1;
-            case DeckActions::DRAW_DEALER: return 1;
-            case DeckActions::SHUFFLE: return 10;
-            case DeckActions::IDLE: return std::numeric_limits<double>::infinity();
+            case DeckActions::DRAW_CHALLENGER: return 1; break;
+            case DeckActions::DRAW_DEALER: return 1; break;
+            case DeckActions::SHUFFLE: return 10; break;
+            case DeckActions::IDLE: return std::numeric_limits<double>::infinity(); break;
         }
         return 1;
     }

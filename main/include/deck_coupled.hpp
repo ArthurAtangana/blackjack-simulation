@@ -9,7 +9,7 @@ class deck_coupled: public cadmium::Coupled {
 public:
     deck_coupled(const std::string& id) : Coupled(id) {
         // Create deck model instance
-        auto deck = addComponent<deck_model>("deck");
+        auto deckModel = addComponent<deck>("deck");
     }
 };
 

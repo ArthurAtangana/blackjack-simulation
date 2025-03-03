@@ -12,8 +12,8 @@ struct top_coupled : public Coupled {
      * Constructor function for the blinkySystem model.
      * @param id ID of the blinkySystem model.
      */
-    top_coupled(const std::string& id) : Coupled(id) {
-        auto atomic_1 = addComponent<atomic_model>("model 1");
+    deck_coupled(const std::string& id) : Coupled(id) {
+        auto deckModel = addComponent<deck>("deck");
     }
 };
 
