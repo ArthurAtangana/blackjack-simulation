@@ -3,7 +3,7 @@
 
 #include "cadmium/modeling/devs/coupled.hpp"
 #include "cadmium/modeling/devs/atomic.hpp"
-#include "deck.hpp"
+#include "src/atomic_models/deck.hpp"
 #include "test/mock_models/mockController.hpp"
 
 class test_deck: public cadmium::Coupled {
