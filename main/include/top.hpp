@@ -6,14 +6,14 @@
 
 using namespace cadmium;
 
-struct deck_coupled : public Coupled {
+struct top_coupled : public Coupled {
 
     /**
      * Constructor function for the blinkySystem model.
      * @param id ID of the blinkySystem model.
      */
-    deck_coupled(const std::string& id) : Coupled(id) {
-        auto deck = addComponent<deck_model>("deck");
+    top_coupled(const std::string& id) : Coupled(id) {
+        auto atomic_1 = addComponent<atomic_model>("model 1");
     }
 };
 

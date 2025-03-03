@@ -1,40 +1,45 @@
-#ifndef mock/mockedModel/_HPP
-#define mock/mockedModel/_HPP
+#ifndef mockHand_HPP
+#define mockHand_HPP
 
 using namespace cadmium;
 
 #include <iostream>
 #include "cadmium/modeling/devs/atomic.hpp"
 
-struct mock/mockedModel/State {
+struct mockHandState {
     //State variables
-    std::vector</MOCK OUTPUT TYPE/> mockOutput;
+    std::vector<int> mockOutput;
     double sigma;
 
-    explicit mock/mockedModel/State(): sigma(1){
-        // TODO: Initialize mockOutput
+    explicit mockHandState(): sigma(1) {
+        // FIFO init, input in order
+        mockOutput.push_back(18);
+        mockOutput.push_back(10);
+        mockOutput.push_back(44);
+        mockOutput.push_back(22);
     }
 };
-#ifndef NO_LOGGING
+
 std::ostream& operator<<(std::ostream &out, const mockHandState& state) {
     out << "{mockOutput(num): " << state.mockOutput.size() << ", mockOutput(next): " << state.mockOutput.back() << "}";
     return out;
 }
-#endif
 
 
-class mock/mockedModel/ : public Atomic<mock/mockedModel/State> {
+
+class mockHand : public Atomic<mockHandState> {
     //Declare your ports here
-    public: Port</MOCK OUTPUT TYPE/> mockOut;
+    public:
+    Port<int> mockOut;
 
-    mock/mockedModel/(const std::string id) : Atomic<mock/mockedModel/State>(id, mock/mockedModel/State()) {
+    mockHand(const std::string id) : Atomic<mockHandState>(id, mockHandState()) {
         //Constructor of your atomic model. Initialize ports here.
         //Initialize output ports
-        mockOut = addOutPort</MOCK OUTPUT TYPE/>("mockOut");
+        mockOut = addOutPort<int>("mockOut");
     }
 
     // inernal transition
-    void internalTransition(mock/mockedModel/State& state) const override {
+    void internalTransition(mockHandState& state) const override {
         //your internal transition function goes here
         state.mockOutput.pop_back();
         if (state.mockOutput.empty()){
@@ -43,20 +48,20 @@ class mock/mockedModel/ : public Atomic<mock/mockedModel/State> {
     }
 
     // external transition
-    void externalTransition(mock/mockedModel/State& state, double e) const override {
+    void externalTransition(mockHandState& state, double e) const override {
         // Should never trigger, no input ports.
         return;
     }
     
     
     // output function
-    void output(const mock/mockedModel/State& state) const override {
+    void output(const mockHandState& state) const override {
         //your output function goes here
         mockOut->addMessage(state.mockOutput.back());
     }
 
     // time_advance function
-    [[nodiscard]] double timeAdvance(const mock/mockedModel/State& state) const override {     
+    [[nodiscard]] double timeAdvance(const mockHandState& state) const override {     
         // 11 seconds between all inputs, highest TA in system is 10. Simple way to avoid race conditions
         return state.sigma; // Should be based on a constant defined somewhere maybe.
     }
