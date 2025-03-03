@@ -68,18 +68,18 @@ std::ostream& operator<<(std::ostream &out, const deckState& state) {
 class deck : public Atomic<deckState> {
     //Declare your ports here
     public:
-    Port<Commands> inPort;
+    Port<deckCommand> inPort;
     Port<cardOut> cardOutPort;
-    Port<Commands> hitOutPort;
+    Port<decision> hitOutPort;
 
     deck(const std::string id) : Atomic<deckState>(id, deckState()) {
         //Constructor of your atomic model. Initialize ports here.
         //Initialize input ports
-        inPort = addInPort<Commands>("inPort");
+        inPort = addInPort<deckCommand>("inPort");
 
         //Initialize output ports
         cardOutPort = addOutPort<cardOut>("cardOutPort");
-        hitOutPort = addOutPort<Commands>("hitOutPort");
+        hitOutPort = addOutPort<decision>("hitOutPort");
     }
 
     // inernal transition
@@ -104,12 +104,12 @@ class deck : public Atomic<deckState> {
     // external transition
     void externalTransition(deckState& state, double e) const override {
         //your external transition function hoes here
-        std::vector<Commands> inPortMsg = inPort->getBag();
+        std::vector<deckCommand> inPortMsg = inPort->getBag();
         if (!inPortMsg.empty()){
             switch (inPortMsg.back()) {
-                case Commands::DRAW_CHALLENGER: state.state = DeckActions::DRAW_CHALLENGER; break;
-                case Commands::DRAW_DEALER: state.state = DeckActions::DRAW_DEALER; break;
-                case Commands::SHUFFLE: state.state = DeckActions::SHUFFLE; break;
+                case deckCommand::DRAW_CHALLENGER: state.state = DeckActions::DRAW_CHALLENGER; break;
+                case deckCommand::DRAW_DEALER: state.state = DeckActions::DRAW_DEALER; break;
+                case deckCommand::SHUFFLE: state.state = DeckActions::SHUFFLE; break;
             }
         }
     }
@@ -127,7 +127,7 @@ class deck : public Atomic<deckState> {
             cardOutPort->addMessage({DeckActions::DRAW_CHALLENGER, drawnCard});
         }
         else if (state.state == DeckActions::SHUFFLE) {
-            hitOutPort->addMessage(Commands::HIT);
+            hitOutPort->addMessage(decision::HIT);
         }
     }
 

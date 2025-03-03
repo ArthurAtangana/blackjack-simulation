@@ -10,21 +10,21 @@ using namespace cadmium;
 
 struct mockControllerState {
     //State variables
-    std::vector<Commands> mockOutput;
+    std::vector<deckCommand> mockOutput;
     double sigma;
 
-    explicit mockControllerState() sigma(11) {
+    explicit mockControllerState(): sigma(11) {
         // TODO: Initialize mockOutput
-        mockOutput.push_back(Commands::DRAW_DEALER);
-        mockOutput.push_back(Commands::DRAW_CHALLENGER);
-        mockOutput.push_back(Commands::SHUFFLE);
+        mockOutput.push_back(deckCommand::DRAW_DEALER);
+        mockOutput.push_back(deckCommand::DRAW_CHALLENGER);
+        mockOutput.push_back(deckCommand::SHUFFLE);
     }
 };
 
 std::ostream& operator<<(std::ostream& out, const mockControllerState& state) {
     out << "mockOutput: [";
     for (const auto& cmd : state.mockOutput) {
-        out << cmd << ", ";  // Assumes `Commands` has an `operator<<`
+        out << cmd << ", ";  // Assumes `deckCommand` has an `operator<<`
     }
     out << "]";
     return out;
@@ -34,20 +34,22 @@ std::ostream& operator<<(std::ostream& out, const mockControllerState& state) {
 class mockController : public Atomic<mockControllerState> {
     //Declare your ports here
     public:
-    Port<Commands> mockOut;
+    Port<deckCommand> mockOut;
 
     mockController(const std::string id) : Atomic<mockControllerState>(id, mockControllerState()) {
         //Constructor of your atomic model. Initialize ports here.
         //Initialize output ports
-        mockOut = addOutPort<Commands>("mockOut");
+        mockOut = addOutPort<deckCommand>("mockOut");
     }
 
     // inernal transition
     void internalTransition(mockControllerState& state) const override {
         //your internal transition function goes here
-        state.mockOutput.pop_back();
+        if (!state.mockOutput.empty()){
+            state.mockOutput.pop_back();
+        }
         if (state.mockOutput.empty()){
-            state.sigma = std::numeric_limits<double>::infinity();;
+            state.sigma = std::numeric_limits<double>::infinity();
         }
     }
 
@@ -66,11 +68,9 @@ class mockController : public Atomic<mockControllerState> {
 
     // time_advance function
     [[nodiscard]] double timeAdvance(const mockControllerState& state) const override {     
-        // 11 seconds between all inputs, highest TA in system is 10. Simple way to avoid race conditions
         return state.sigma; // Should be based on a constant defined somewhere maybe.
     }
 };
 
 
 #endif
-

@@ -5,11 +5,7 @@ using namespace cadmium;
 
 #include <limits> //Required for infinity
 #include "cadmium/modeling/devs/atomic.hpp"
-
-enum decision{
-    HIT,
-    STAND
-};
+#include "src/shared_data/commands.hpp"
 
 struct thresholdState{
     int threshold;
