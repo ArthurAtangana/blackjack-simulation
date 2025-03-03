@@ -1,6 +1,6 @@
 #include <limits>
-#include "include/threshold_test.hpp"
-#include "include/test_deck.hpp"
+#include "include/test/test_couplings/threshold_test.hpp"
+#include "include/test/test_couplings/test_deck.hpp"
 
 /*
 There are 3 macros defined at compile time that changes the behaviour of the simulation.
