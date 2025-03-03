@@ -1,5 +1,7 @@
 #include <limits>
 #include "include/threshold_test.hpp"
+#include "include/deck_coupled.hpp"
+#include "include/test_deck.hpp"
 
 /*
 There are 3 macros defined at compile time that changes the behaviour of the simulation.
@@ -35,7 +37,8 @@ extern "C" {
 	#endif
 	{
 	
-		auto model = std::make_shared<ThresholdTest> ("threshold_test");
+		// auto model = std::make_shared<ThresholdTest> ("threshold_test");
+		auto model = std::make_shared<test_deck> ("test_deck");
 		
 		#ifdef SIM_TIME
 			auto rootCoordinator = cadmium::RootCoordinator(model);

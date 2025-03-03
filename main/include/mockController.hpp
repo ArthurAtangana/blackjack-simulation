@@ -11,11 +11,12 @@ using namespace cadmium;
 struct mockControllerState {
     //State variables
     std::vector<Commands> mockOutput;
+    double sigma;
 
-    explicit mockControllerState() {
+    explicit mockControllerState(): sigma(11) {
         // TODO: Initialize mockOutput
-        mockOutput.push_back(Commands::DRAW_CHALLENGER);
         mockOutput.push_back(Commands::DRAW_DEALER);
+        mockOutput.push_back(Commands::DRAW_CHALLENGER);
         mockOutput.push_back(Commands::SHUFFLE);
     }
 };
@@ -47,6 +48,9 @@ class mockController : public Atomic<mockControllerState> {
         if (!state.mockOutput.empty()){
             state.mockOutput.pop_back();
         }
+        if (state.mockOutput.empty()){
+            state.sigma = std::numeric_limits<double>::infinity();
+        }
     }
 
     // external transition
@@ -64,8 +68,7 @@ class mockController : public Atomic<mockControllerState> {
 
     // time_advance function
     [[nodiscard]] double timeAdvance(const mockControllerState& state) const override {     
-        // 11 seconds between all inputs, highest TA in system is 10. Simple way to avoid race conditions
-        return 11; // Should be based on a constant defined somewhere maybe.
+        return state.sigma; // Should be based on a constant defined somewhere maybe.
     }
 };
 
