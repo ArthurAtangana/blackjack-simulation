@@ -3,7 +3,6 @@
 
 using namespace cadmium;
 
-#include <random>
 #include <iostream>
 #include "cadmium/modeling/devs/atomic.hpp"
 
@@ -11,7 +10,7 @@ struct mock/mockedModel/State {
     //State variables
     std::vector</MOCK OUTPUT TYPE/> mockOutput;
 
-    explicit mock/mockedModel/State(): {
+    explicit mock/mockedModel/State() {
         // TODO: Initialize mockOutput
     }
 };
@@ -19,10 +18,9 @@ struct mock/mockedModel/State {
 
 class mock/mockedModel/ : public Atomic<mock/mockedModel/State> {
     //Declare your ports here
-    public:
-    Port</MOCK OUTPUT TYPE/> mockOut;
+    public: Port</MOCK OUTPUT TYPE/> mockOut;
 
-    mock/mockedModel/(const std::string id) : Atomic<<mock/mockedModel/State>(id, mock/mockedModel/State()) {
+    mock/mockedModel/(const std::string id) : Atomic<mock/mockedModel/State>(id, mock/mockedModel/State()) {
         //Constructor of your atomic model. Initialize ports here.
         //Initialize output ports
         mockOut = addOutPort</MOCK OUTPUT TYPE/>("mockOut");
@@ -31,7 +29,7 @@ class mock/mockedModel/ : public Atomic<mock/mockedModel/State> {
     // inernal transition
     void internalTransition(mock/mockedModel/State& state) const override {
         //your internal transition function goes here
-        mockOutput.pop_back();
+        state.mockOutput.pop_back();
     }
 
     // external transition
@@ -44,7 +42,7 @@ class mock/mockedModel/ : public Atomic<mock/mockedModel/State> {
     // output function
     void output(const mock/mockedModel/State& state) const override {
         //your output function goes here
-        mockOutput.back();
+        mockOut->addMessage(state.mockOutput.back());
     }
 
     // time_advance function
