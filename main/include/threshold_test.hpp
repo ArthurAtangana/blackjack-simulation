@@ -3,14 +3,14 @@
 
 #include "cadmium/modeling/devs/coupled.hpp"
 #include "cadmium/modeling/devs/atomic.hpp"
-#include "threshold.hpp"
+#include "mock_hand.hpp"
 
-class ThersholdTest: public cadmium::Coupled {
+class ThresholdTest: public cadmium::Coupled {
 public:
-    ThersholdTest(const std::string& id) : Coupled(id) {
+    ThresholdTest(const std::string& id) : Coupled(id) {
         // Create model instances
         auto threshold = addComponent<threshold>("threshold");
-        auto mockHand = addComponent<mockHand>("mockHand");
+        auto mockHandModel = addComponent<mockHand>("mockHand");
     }
 };
 

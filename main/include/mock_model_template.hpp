@@ -14,6 +14,12 @@ struct mock/mockedModel/State {
         // TODO: Initialize mockOutput
     }
 };
+#ifndef NO_LOGGING
+std::ostream& operator<<(std::ostream &out, const mockHandState& state) {
+    out << "{mockOutput(num): " << state.mockOutput.size() << ", mockOutput(next): " << state.mockOutput.back() << "}";
+    return out;
+}
+#endif
 
 
 class mock/mockedModel/ : public Atomic<mock/mockedModel/State> {
