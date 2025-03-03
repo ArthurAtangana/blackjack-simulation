@@ -7,6 +7,7 @@ using namespace cadmium;
 #include <iostream>
 #include "cadmium/modeling/devs/atomic.hpp"
 #include "src/shared_data/commands.hpp"
+#include "src/shared_data/cards.hpp"
 
 enum class DeckActions {
     IDLE,
@@ -27,7 +28,7 @@ std::ostream& operator<<(std::ostream& out, const DeckActions& action) {
 
 struct cardOut{
     DeckActions command;
-    int card;
+    Cards card;
 };
 std::ostream& operator<<(std::ostream& out, const cardOut& co) {
     out << "{ command: " << co.command << ", card: " << co.card << " }";
@@ -37,11 +38,13 @@ std::ostream& operator<<(std::ostream& out, const cardOut& co) {
 struct deckState {
     //State variables
     DeckActions state;
-    std::vector<int> cards;
+    std::vector<Cards> cards;
 
     explicit deckState(): state(DeckActions::IDLE) {
-        for (int i = 1; i <= 52; i++){
-            cards.push_back(i);
+        for (int i = 0; i < static_cast<int>(Cards::ACE)+1; ++i) {
+            for (int j = 0; j < 4; ++j) {  // Add each element 4 times
+                cards.push_back(static_cast<Cards>(i));
+            }
         }
     }
 };
@@ -57,7 +60,7 @@ std::ostream& operator<<(std::ostream &out, const deckState& state) {
     }
     out << ", cards remaining: " << state.cards.size() << "\n";
     out << "Current Order: [";
-    for (int c: state.cards) {
+    for (Cards c: state.cards) {
         out << c << ",";
     }
     out << "]\n";
@@ -119,11 +122,11 @@ class deck : public Atomic<deckState> {
     void output(const deckState& state) const override {
         //your output function goes here
         if (state.state == DeckActions::DRAW_DEALER && !state.cards.empty()){
-            int drawnCard = state.cards.back();
+            Cards drawnCard = state.cards.back();
             cardOutPort->addMessage({DeckActions::DRAW_DEALER, drawnCard});
         }
         else if (state.state == DeckActions::DRAW_CHALLENGER && !state.cards.empty()){
-            int drawnCard = state.cards.back();
+            Cards drawnCard = state.cards.back();
             cardOutPort->addMessage({DeckActions::DRAW_CHALLENGER, drawnCard});
         }
         else if (state.state == DeckActions::SHUFFLE) {
