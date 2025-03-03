@@ -1,5 +1,5 @@
 #include <limits>
-#include "include/top.hpp"
+#include "include/deck_coupled.hpp"
 
 /*
 There are 3 macros defined at compile time that changes the behaviour of the simulation.
@@ -35,7 +35,7 @@ extern "C" {
 	#endif
 	{
 	
-		auto model = std::make_shared<top_coupled> ("top");
+		auto model = std::make_shared<deck_coupled> ("deck_coupled");
 		
 		#ifdef SIM_TIME
 			auto rootCoordinator = cadmium::RootCoordinator(model);
