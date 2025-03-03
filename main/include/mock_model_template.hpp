@@ -9,8 +9,9 @@ using namespace cadmium;
 struct mock/mockedModel/State {
     //State variables
     std::vector</MOCK OUTPUT TYPE/> mockOutput;
+    double sigma;
 
-    explicit mock/mockedModel/State() {
+    explicit mock/mockedModel/State(): sigma(1){
         // TODO: Initialize mockOutput
     }
 };
@@ -36,6 +37,9 @@ class mock/mockedModel/ : public Atomic<mock/mockedModel/State> {
     void internalTransition(mock/mockedModel/State& state) const override {
         //your internal transition function goes here
         state.mockOutput.pop_back();
+        if (state.mockOutput.empty()){
+            state.sigma = std::numeric_limits<double>::infinity();;
+        }
     }
 
     // external transition
@@ -54,7 +58,7 @@ class mock/mockedModel/ : public Atomic<mock/mockedModel/State> {
     // time_advance function
     [[nodiscard]] double timeAdvance(const mock/mockedModel/State& state) const override {     
         // 11 seconds between all inputs, highest TA in system is 10. Simple way to avoid race conditions
-        return 11; // Should be based on a constant defined somewhere maybe.
+        return state.sigma; // Should be based on a constant defined somewhere maybe.
     }
 };
 

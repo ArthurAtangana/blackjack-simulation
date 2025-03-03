@@ -9,8 +9,9 @@ using namespace cadmium;
 struct mockHandState {
     //State variables
     std::vector<int> mockOutput;
+    double sigma;
 
-    explicit mockHandState() {
+    explicit mockHandState(): sigma(1) {
         // FIFO init, input in order
         mockOutput.push_back(18);
         mockOutput.push_back(10);
@@ -19,12 +20,10 @@ struct mockHandState {
     }
 };
 
-#ifndef NO_LOGGING
 std::ostream& operator<<(std::ostream &out, const mockHandState& state) {
     out << "{mockOutput(num): " << state.mockOutput.size() << ", mockOutput(next): " << state.mockOutput.back() << "}";
     return out;
 }
-#endif
 
 
 
@@ -43,6 +42,9 @@ class mockHand : public Atomic<mockHandState> {
     void internalTransition(mockHandState& state) const override {
         //your internal transition function goes here
         state.mockOutput.pop_back();
+        if (state.mockOutput.empty()){
+            state.sigma = std::numeric_limits<double>::infinity();;
+        }
     }
 
     // external transition
@@ -61,7 +63,7 @@ class mockHand : public Atomic<mockHandState> {
     // time_advance function
     [[nodiscard]] double timeAdvance(const mockHandState& state) const override {     
         // 11 seconds between all inputs, highest TA in system is 10. Simple way to avoid race conditions
-        return 11; // Should be based on a constant defined somewhere maybe.
+        return state.sigma; // Should be based on a constant defined somewhere maybe.
     }
 };
 

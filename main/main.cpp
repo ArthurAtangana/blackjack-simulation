@@ -57,7 +57,7 @@ extern "C" {
 		#ifdef ESP_PLATFORM
 			rootCoordinator.simulate(std::numeric_limits<double>::infinity());
 		#else
-			rootCoordinator.simulate(23.0);
+			rootCoordinator.simulate(100.0); // Max time limit
 		#endif
 		rootCoordinator.stop();	
 
