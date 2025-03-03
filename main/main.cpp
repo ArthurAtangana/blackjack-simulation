@@ -1,6 +1,5 @@
 #include <limits>
 #include "include/threshold_test.hpp"
-#include "include/deck_coupled.hpp"
 #include "include/test_deck.hpp"
 
 /*
