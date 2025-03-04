@@ -4,6 +4,8 @@
 #include<iostream>
 
 enum Cards {
+    NO_CARD,
+    ACE,
     TWO,
     THREE,
     FOUR,
@@ -15,14 +17,12 @@ enum Cards {
     TEN,
     JACK,
     QUEEN,
-    KING,
-    ACE
+    KING
 };
-
-#endif
 
 inline std::ostream& operator<<(std::ostream& out, const Cards& command) {
     switch (command) {
+        case Cards::NO_CARD: out << "NO CARD"; break;
         case Cards::TWO: out << "2"; break;
         case Cards::THREE: out << "3"; break;
         case Cards::FOUR: out << "4"; break;
@@ -40,3 +40,5 @@ inline std::ostream& operator<<(std::ostream& out, const Cards& command) {
     }
     return out;
 }
+
+#endif
