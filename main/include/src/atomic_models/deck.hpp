@@ -41,9 +41,10 @@ struct deckState {
     std::vector<Cards> cards;
 
     explicit deckState(): state(DeckActions::IDLE) {
-        for (int i = 0; i < static_cast<int>(Cards::ACE)+1; ++i) {
+        for (int i = 1; i < static_cast<int>(Cards::KING)+1; ++i) {
             for (int j = 0; j < 4; ++j) {  // Add each element 4 times
                 cards.push_back(static_cast<Cards>(i));
+                
             }
         }
     }
