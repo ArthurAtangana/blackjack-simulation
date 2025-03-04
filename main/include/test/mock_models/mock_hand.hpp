@@ -12,11 +12,13 @@ struct mockHandState {
     double sigma;
 
     explicit mockHandState(): sigma(1) {
-        // FIFO init, input in order
+        // FILO init, input in order
         mockOutput.push_back(18);
         mockOutput.push_back(10);
         mockOutput.push_back(44);
         mockOutput.push_back(22);
+        // Convert to FIFO
+        std::reverse(mockOutput.begin(), mockOutput.end());
     }
 };
 
