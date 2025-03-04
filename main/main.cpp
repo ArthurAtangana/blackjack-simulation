@@ -46,6 +46,8 @@ extern "C" {
 		// auto model = std::make_shared<handTest> ("hand_test");
 		// auto model = std::make_shared<challengerTest> ("challengerTest");
 		auto model = std::make_shared<dealerTest> ("dealerTest");
+		// auto model = std::make_shared<test_deck> ("test_deck");
+		// auto model = std::make_shared<handTest> ("hand_test");
 
 		
 		#ifdef SIM_TIME
