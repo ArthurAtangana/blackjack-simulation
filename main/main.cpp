@@ -7,6 +7,9 @@
 #include "include/test/test_couplings/hand_test.hpp"
 #include "include/src/coupled_models/challenger.hpp"
 #include "include/test/test_couplings/hand_test.hpp"
+#include "include/src/coupled_models/challenger.hpp"
+#include "include/test/test_couplings/hand_test.hpp"
+#include "include/src/coupled_models/challenger.hpp"
 
 /*
 There are 3 macros defined at compile time that changes the behaviour of the simulation.
@@ -50,6 +53,7 @@ extern "C" {
 		// auto model = std::make_shared<dealerTest> ("dealerTest");
 		// auto model = std::make_shared<test_deck> ("test_deck");
 		// auto model = std::make_shared<handTest> ("hand_test");
+		auto model = std::make_shared<challenger> ("challenger");
 		auto model = std::make_shared<handTest> ("players_test");
 		
 
