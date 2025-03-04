@@ -33,5 +33,20 @@ inline std::ostream& operator<<(std::ostream& out, const decision& command) {
     return out;
 }
 
-#endif
+enum outcome{
+    WIN,
+    LOSE,
+    TIE
+};
 
+inline std::ostream& operator<<(std::ostream& out, const outcome& o){
+    switch (o) {
+        case outcome::WIN: out << "WIN"; break;
+        case outcome::LOSE: out << "LOSE"; break;
+        case outcome::TIE: out << "TIE"; break;
+        defautl: out << "UNKNOWN OUTCOME"; break;
+    }
+    return out;
+}
+
+#endif
