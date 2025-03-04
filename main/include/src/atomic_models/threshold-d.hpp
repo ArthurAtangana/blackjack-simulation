@@ -13,7 +13,7 @@ struct thresholdDState{
     double sigma;
     // Defaults
 explicit thresholdDState():
-    threshold(18), // Not sure how to change this once at start of model
+    threshold(17), // Not sure how to change this once at start of model
     comparisonValue(0),
     sigma(std::numeric_limits<double>::infinity()) {}
 };
