@@ -1,16 +1,16 @@
-#ifndef THRESHOLD_TEST_HPP
-#define THRESHOLD_TEST_HPP
+#ifndef THRESHOLDD_TEST_HPP
+#define THRESHOLDD_TEST_HPP
 
 #include "cadmium/modeling/devs/coupled.hpp"
 #include "cadmium/modeling/devs/atomic.hpp"
 #include "test/mock_models/mock_hand.hpp"
-#include "src/atomic_models/threshold.hpp"
+#include "src/atomic_models/threshold-d.hpp"
 
-class ThresholdTest: public cadmium::Coupled {
+class ThresholdDTest: public cadmium::Coupled {
 public:
-    ThresholdTest(const std::string& id) : Coupled(id) {
+    ThresholdDTest(const std::string& id) : Coupled(id) {
         // Create model instances
-        auto thresholdModel = addComponent<threshold>("threshold");
+        auto thresholdModel = addComponent<thresholdD>("threshold");
         auto mockHandModel = addComponent<mockHand>("mockHand");
 
         addCoupling(mockHandModel->mockOut, thresholdModel->valueIn);

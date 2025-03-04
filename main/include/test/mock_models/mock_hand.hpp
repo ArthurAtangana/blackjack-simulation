@@ -14,6 +14,7 @@ struct mockHandState {
     explicit mockHandState(): sigma(1) {
         // FILO init, input in order
         mockOutput.push_back(18);
+        mockOutput.push_back(17);
         mockOutput.push_back(10);
         mockOutput.push_back(44);
         mockOutput.push_back(22);

@@ -1,7 +1,11 @@
 #include <limits>
-#include "include/test/test_couplings/threshold_test.hpp"
+#include "include/test/test_couplings/thresholdC_test.hpp"
+#include "include/test/test_couplings/thresholdD_test.hpp"
+#include "include/test/test_couplings/challenger_test.hpp"
+#include "include/test/test_couplings/dealer_test.hpp"
 #include "include/test/test_couplings/test_deck.hpp"
 #include "include/test/test_couplings/hand_test.hpp"
+#include "include/src/coupled_models/challenger.hpp"
 
 /*
 There are 3 macros defined at compile time that changes the behaviour of the simulation.
@@ -38,7 +42,11 @@ extern "C" {
 	{
 	
 		// auto model = std::make_shared<ThresholdTest> ("threshold_test");
-		auto model = std::make_shared<test_deck> ("test_deck");
+		// auto model = std::make_shared<test_deck> ("test_deck");
+		// auto model = std::make_shared<handTest> ("hand_test");
+		// auto model = std::make_shared<challengerTest> ("challengerTest");
+		auto model = std::make_shared<dealerTest> ("dealerTest");
+		// auto model = std::make_shared<test_deck> ("test_deck");
 		// auto model = std::make_shared<handTest> ("hand_test");
 
 		
