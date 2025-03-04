@@ -3,7 +3,8 @@
 #include "include/test/test_couplings/thresholdD_test.hpp"
 #include "include/test/test_couplings/challenger_test.hpp"
 #include "include/test/test_couplings/dealer_test.hpp"
-#include "include/test/test_couplings/test_deck.hpp"
+#include "include/test/test_couplings/deck_test.hpp"
+#include "include/test/test_couplings/players_test.hpp"
 #include "include/test/test_couplings/hand_test.hpp"
 #include "include/src/coupled_models/challenger.hpp"
 #include "include/test/test_couplings/hand_test.hpp"
@@ -54,7 +55,7 @@ extern "C" {
 		// auto model = std::make_shared<test_deck> ("test_deck");
 		// auto model = std::make_shared<handTest> ("hand_test");
 		// auto model = std::make_shared<challenger> ("challenger");
-		auto model = std::make_shared<handTest> ("players_test");
+		auto model = std::make_shared<playersTest> ("players_test");
 		
 
 		

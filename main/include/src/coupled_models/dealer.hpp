@@ -16,7 +16,7 @@ public:
 
     dealer(const std::string& id) : Coupled(id) {
         // Create model instances
-        auto thresholdModel = addComponent<thresholdD>("threshold");
+        auto thresholdModel = addComponent<thresholdD>("threshold-d");
         auto handModel = addComponent<hand>("hand");
 
         // Add ports
