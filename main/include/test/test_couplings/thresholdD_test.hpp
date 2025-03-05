@@ -10,7 +10,7 @@ class ThresholdDTest: public cadmium::Coupled {
 public:
     ThresholdDTest(const std::string& id) : Coupled(id) {
         // Create model instances
-        auto thresholdModel = addComponent<thresholdD>("threshold");
+        auto thresholdModel = addComponent<thresholdD>("threshold-d");
         auto mockHandModel = addComponent<mockHand>("mockHand");
 
         addCoupling(mockHandModel->mockOut, thresholdModel->valueIn);
