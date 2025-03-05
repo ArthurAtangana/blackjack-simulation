@@ -8,6 +8,7 @@ using namespace cadmium;
 #include "cadmium/modeling/devs/atomic.hpp"
 #include "src/shared_data/commands.hpp"
 #include "src/shared_data/cards.hpp"
+#include "src/shared_data/players.hpp"
 
 enum class DeckActions {
     IDLE,

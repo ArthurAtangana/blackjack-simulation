@@ -3,7 +3,7 @@
 
 #include<iostream>
 
-enum deckCommand {
+enum class deckCommand {
     SHUFFLE,
     DRAW_CHALLENGER,
     DRAW_DEALER,
@@ -19,7 +19,7 @@ inline std::ostream& operator<<(std::ostream& out, const deckCommand& command) {
     return out;
 }
 
-enum decision{
+enum class decision{
     HIT,
     STAND
 };
@@ -33,7 +33,8 @@ inline std::ostream& operator<<(std::ostream& out, const decision& command) {
     return out;
 }
 
-enum outcome{
+enum class outcome{
+    CONTINUE,
     WIN,
     LOSE,
     TIE
@@ -41,6 +42,7 @@ enum outcome{
 
 inline std::ostream& operator<<(std::ostream& out, const outcome& o){
     switch (o) {
+        case outcome::CONTINUE: out << "CONTINUE"; break;
         case outcome::WIN: out << "WIN"; break;
         case outcome::LOSE: out << "LOSE"; break;
         case outcome::TIE: out << "TIE"; break;
