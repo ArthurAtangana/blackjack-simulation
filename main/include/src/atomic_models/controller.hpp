@@ -16,7 +16,6 @@ enum controllerActions {
     START,
     HIT,
     STAND,
-    CHECK_WINNER,
     IDLE
 };
 
@@ -25,7 +24,6 @@ inline std::ostream& operator<<(std::ostream& out, const controllerActions& acti
         case controllerActions::START: out << "START"; break;
         case controllerActions::HIT: out << "HIT"; break;
         case controllerActions::STAND: out << "STAND"; break;
-        case controllerActions::CHECK_WINNER: out << "CHECK_WINNER"; break;
         case controllerActions::IDLE: out << "IDLE"; break;
         defautl: out << "UNKNOWN STATE"; break;
     }
@@ -60,10 +58,11 @@ class controller : public Atomic<controllerState> {
     //in
     Port<int> startInPort;
     Port<decision> decisionInPort;
-    Port<int> valueInPort;
+    Port<int> handValueInPort;
 
     //out
     Port<deckCommand> commandOutPort;
+    Port<Players> playerOutPort;
     Port<outcome> outcomeOutPort;
 
     controller(const std::string id) : Atomic<controllerState>(id, controllerState()) {
@@ -71,10 +70,11 @@ class controller : public Atomic<controllerState> {
         //Initialize input ports
         startInPort = addInPort<int>("startInPort");
         decisionInPort = addInPort<decision>("decisionInPort");
-        valueInPort = addInPort<int>("cardValueInPort");
+        handValueInPort = addInPort<int>("handValueInPort");
 
         //Initialize output ports
         commandOutPort = addOutPort<deckCommand>("commandOutPort");
+        playerOutPort = addOutPort<Players>("playerOutPort");
         outcomeOutPort = addOutPort<outcome>("outcomeOutPort");
     }
 
@@ -143,12 +143,12 @@ class controller : public Atomic<controllerState> {
                     state.sigma = 1;
                     break;
                 case decision::STAND:
-                    if (!valueInPort->empty()) {
+                    if (!handValueInPort->empty()) {
                         if (state.current_player == Players::CHALLENGER) {
-                            state.challenger_score = valueInPort->getBag().back();
+                            state.challenger_score = handValueInPort->getBag().back();
                         }
                         else if (state.current_player == Players::DEALER) {
-                            state.dealer_score = valueInPort->getBag().back();
+                            state.dealer_score = handValueInPort->getBag().back();
                         }
                         state.state = controllerActions::STAND;
                         state.sigma = 1;
@@ -168,6 +168,7 @@ class controller : public Atomic<controllerState> {
         else if (state.state == controllerActions::HIT) {
             if (state.current_player == Players::CHALLENGER){
                 commandOutPort->addMessage(deckCommand::DRAW_CHALLENGER);
+                playerOutPort->addMessage(Players::CHALLENGER):
             }
             else if (state.current_player == Players::DEALER){
                 commandOutPort->addMessage(deckCommand::DRAW_DEALER);

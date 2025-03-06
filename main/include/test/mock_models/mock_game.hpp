@@ -75,14 +75,14 @@ class mock_game : public Atomic<mock_gameState> {
     // Out Ports
     Port<int> startPort;
     Port<decision> decisionOutPort;
-    Port<int> cardValueOutPort;
+    Port<int> handValueOutPort;
 
     mock_game(const std::string id) : Atomic<mock_gameState>(id, mock_gameState()) {
         //Constructor of your atomic model. Initialize ports here.
         //Initialize output ports
         startPort = addOutPort<int>("startOutPort");
         decisionOutPort = addOutPort<decision>("decisionOutPort");
-        cardValueOutPort = addOutPort<int>("cardValueOutPort");
+        handValueOutPort = addOutPort<int>("handValueOutPort");
 
     }
 
@@ -119,7 +119,7 @@ class mock_game : public Atomic<mock_gameState> {
         else {
             decisionOutPort->addMessage(state.decisionsOutput.back());
             if (state.decisionsOutput.back() == decision::STAND){
-                cardValueOutPort->addMessage(state.cardValueOutput.back());
+                handValueOutPort->addMessage(state.cardValueOutput.back());
             }
         }
     }

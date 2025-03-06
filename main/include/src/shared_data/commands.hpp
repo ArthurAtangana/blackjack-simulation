@@ -5,8 +5,7 @@
 
 enum class deckCommand {
     SHUFFLE,
-    DRAW_CHALLENGER,
-    DRAW_DEALER,
+    DRAW
 };
 
 inline std::ostream& operator<<(std::ostream& out, const deckCommand& command) {

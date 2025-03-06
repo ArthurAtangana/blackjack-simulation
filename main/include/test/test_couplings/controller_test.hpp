@@ -16,7 +16,7 @@ public:
         //Coupling
         addCoupling(mockGameModel->startPort, controllerModel->startInPort);
         addCoupling(mockGameModel->decisionOutPort, controllerModel->decisionInPort);
-        addCoupling(mockGameModel->cardValueOutPort, controllerModel->valueInPort);
+        addCoupling(mockGameModel->handValueOutPort, controllerModel->handValueInPort);
     }
 };
 #endif
