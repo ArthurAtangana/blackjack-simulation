@@ -27,15 +27,6 @@ std::ostream& operator<<(std::ostream& out, const DeckActions& action) {
     return out;
 }
 
-struct cardOut{
-    DeckActions command;
-    Cards card;
-};
-std::ostream& operator<<(std::ostream& out, const cardOut& co) {
-    out << "{ command: " << co.command << ", card: " << co.card << " }";
-    return out;
-}
-
 struct deckState {
     //State variables
     DeckActions state;
@@ -75,7 +66,8 @@ class deck : public Atomic<deckState> {
     Port<deckCommand> commandInPort;
     Port<Players> playerInPort;
     //out port
-    Port<cardOut> cardOutPort;
+    Port<Cards> challengerCardOutPort;
+    Port<Cards> dealerCardOutPort;
     Port<decision> hitOutPort;
 
     deck(const std::string id) : Atomic<deckState>(id, deckState()) {
@@ -85,7 +77,8 @@ class deck : public Atomic<deckState> {
         playerInPort = addInPort<Players>("playerInPort");
 
         //Initialize output ports
-        cardOutPort = addOutPort<cardOut>("cardOutPort");
+        challengerCardOutPort = addOutPort<Cards>("challengerCardOutPort");
+        dealerCardOutPort = addOutPort<Cards>("dealerCardOutPort");
         hitOutPort = addOutPort<decision>("hitOutPort");
     }
 
@@ -136,11 +129,11 @@ class deck : public Atomic<deckState> {
         //your output function goes here
         if (state.state == DeckActions::DRAW_DEALER && !state.cards.empty()){
             Cards drawnCard = state.cards.back();
-            cardOutPort->addMessage({DeckActions::DRAW_DEALER, drawnCard});
+            dealerCardOutPort->addMessage(drawnCard);
         }
         else if (state.state == DeckActions::DRAW_CHALLENGER && !state.cards.empty()){
             Cards drawnCard = state.cards.back();
-            cardOutPort->addMessage({DeckActions::DRAW_CHALLENGER, drawnCard});
+            challengerCardOutPort->addMessage(drawnCard);
         }
         else if (state.state == DeckActions::SHUFFLE) {
             hitOutPort->addMessage(decision::HIT);
