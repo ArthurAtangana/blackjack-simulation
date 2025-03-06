@@ -111,29 +111,23 @@ class deck : public Atomic<deckState> {
     // external transition
     void externalTransition(deckState& state, double e) const override {
         //your external transition function hoes here
-        if (!commandInPort->empty() && !playerInPort->empty()){
+        if (!commandInPort->empty()){
             const auto commandLastInput = (commandInPort->getBag()).back();
-            const auto playerLastInput = (playerInPort->getBag()).back();
             switch (commandLastInput) {
                 case deckCommand::SHUFFLE: state.state = DeckActions::SHUFFLE; break;
                 case deckCommand::DRAW:
-                    if (playerLastInput == Players::CHALLENGER) {
-                        state.state = DeckActions::DRAW_CHALLENGER;
-                    }
-                    else if (playerLastInput == Players::DEALER) {
-                        state.state = DeckActions::DRAW_DEALER;
+                    if (!playerInPort->empty()){
+                        const auto playerLastInput = (playerInPort->getBag()).back();
+                        if (playerLastInput == Players::CHALLENGER) {
+                            state.state = DeckActions::DRAW_CHALLENGER;
+                        }
+                        else if (playerLastInput == Players::DEALER) {
+                            state.state = DeckActions::DRAW_DEALER;
+                        }
                     }
                     break;
             }
-            }
-        // std::vector<deckCommand> commandInPortMsg = commandInPort->getBag();
-        // if (!commandInPortMsg.empty()){
-        //     switch (commandInPortMsg.back()) {
-        //         case deckCommand::DRAW_CHALLENGER: state.state = DeckActions::DRAW_CHALLENGER; break;
-        //         case deckCommand::DRAW_DEALER: state.state = DeckActions::DRAW_DEALER; break;
-        //         case deckCommand::SHUFFLE: state.state = DeckActions::SHUFFLE; break;
-        //     }
-        // }
+        }
     }
     
     
