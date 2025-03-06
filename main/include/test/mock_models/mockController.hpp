@@ -7,24 +7,33 @@ using namespace cadmium;
 #include <iostream>
 #include "cadmium/modeling/devs/atomic.hpp"
 #include "src/shared_data/commands.hpp"
+#include "src/shared_data/players.hpp"
 
 struct mockControllerState {
     //State variables
-    std::vector<deckCommand> mockOutput;
+    std::vector<deckCommand> mockCommands; // mockCommands to be sent to the deck
+    std::vector<Players> players; // players that are being sent out the card
     double sigma;
 
     explicit mockControllerState(): sigma(11) {
-        // TODO: Initialize mockOutput
-        mockOutput.push_back(deckCommand::DRAW_DEALER);
-        mockOutput.push_back(deckCommand::DRAW_CHALLENGER);
-        mockOutput.push_back(deckCommand::SHUFFLE);
+        mockCommands.push_back(deckCommand::DRAW);
+        mockCommands.push_back(deckCommand::DRAW);
+        mockCommands.push_back(deckCommand::SHUFFLE);
+
+        players.push_back(Players::DEALER);
+        players.push_back(Players::CHALLENGER);
     }
 };
 
 std::ostream& operator<<(std::ostream& out, const mockControllerState& state) {
-    out << "mockOutput: [";
-    for (const auto& cmd : state.mockOutput) {
+    out << "mockCommands: [";
+    for (const auto& cmd : state.mockCommands) {
         out << cmd << ", ";  // Assumes `deckCommand` has an `operator<<`
+    }
+    out << "]";
+    out << "mockPlayerCommands: [";
+    for (const auto& p : state.players) {
+        out << p << ", ";  // Assumes `deckCommand` has an `operator<<`
     }
     out << "]";
     return out;
@@ -34,21 +43,29 @@ std::ostream& operator<<(std::ostream& out, const mockControllerState& state) {
 class mockController : public Atomic<mockControllerState> {
     //Declare your ports here
     public:
-    Port<deckCommand> mockOut;
+    Port<deckCommand> commandOutPort;
+    Port<Players> playerOutPort;
 
     mockController(const std::string id) : Atomic<mockControllerState>(id, mockControllerState()) {
         //Constructor of your atomic model. Initialize ports here.
         //Initialize output ports
-        mockOut = addOutPort<deckCommand>("mockOut");
+        commandOutPort = addOutPort<deckCommand>("commandOutPort");
+        playerOutPort = addOutPort<Players>("playerOutPort");
     }
 
     // inernal transition
     void internalTransition(mockControllerState& state) const override {
         //your internal transition function goes here
-        if (!state.mockOutput.empty()){
-            state.mockOutput.pop_back();
+        if (!state.mockCommands.empty()){
+            if (state.mockCommands.back() == deckCommand::DRAW) {
+                state.mockCommands.pop_back();
+                state.players.pop_back();
+            }
+            else {
+                state.mockCommands.pop_back();
+            }
         }
-        if (state.mockOutput.empty()){
+        if (state.mockCommands.empty() && state.players.empty()){
             state.sigma = std::numeric_limits<double>::infinity();
         }
     }
@@ -63,7 +80,10 @@ class mockController : public Atomic<mockControllerState> {
     // output function
     void output(const mockControllerState& state) const override {
         //your output function goes here
-        mockOut->addMessage(state.mockOutput.back());
+        commandOutPort->addMessage(state.mockCommands.back());
+        if (state.mockCommands.back() == deckCommand::DRAW) {
+            playerOutPort->addMessage(state.players.back());
+        }
     }
 
     // time_advance function

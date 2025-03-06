@@ -167,11 +167,12 @@ class controller : public Atomic<controllerState> {
         }
         else if (state.state == controllerActions::HIT) {
             if (state.current_player == Players::CHALLENGER){
-                commandOutPort->addMessage(deckCommand::DRAW_CHALLENGER);
-                playerOutPort->addMessage(Players::CHALLENGER):
+                commandOutPort->addMessage(deckCommand::DRAW);
+                playerOutPort->addMessage(Players::CHALLENGER);
             }
             else if (state.current_player == Players::DEALER){
-                commandOutPort->addMessage(deckCommand::DRAW_DEALER);
+                commandOutPort->addMessage(deckCommand::DRAW);
+                playerOutPort->addMessage(Players::DEALER);
             }
         }
         else if (state.state == controllerActions::STAND){

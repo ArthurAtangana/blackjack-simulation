@@ -15,7 +15,7 @@ struct mock_gameState {
     int start;
     double sigma;
 
-    explicit mock_gameState(): start(1), sigma(1){
+    explicit mock_gameState(): start(1), sigma(11){
         // TODO: Initialize decisionsOutput
         decisionsOutput.push_back(decision::STAND);
         decisionsOutput.push_back(decision::HIT);

@@ -11,8 +11,7 @@ enum class deckCommand {
 inline std::ostream& operator<<(std::ostream& out, const deckCommand& command) {
     switch (command) {
         case deckCommand::SHUFFLE: out << "SHUFFLE"; break;
-        case deckCommand::DRAW_CHALLENGER: out << "DRAW_CHALLENGER"; break;
-        case deckCommand::DRAW_DEALER: out << "DRAW_DEALER"; break;
+        case deckCommand::DRAW: out << "DRAW"; break;
         default: out << "UNKNOWN"; break;
     }
     return out;
