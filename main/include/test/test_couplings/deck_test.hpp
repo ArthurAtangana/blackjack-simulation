@@ -13,7 +13,8 @@ public:
         auto deckModel = addComponent<deck>("deck");
         auto mockControllerModel = addComponent<mockController>("mockController");
         // couplings
-        addCoupling(mockControllerModel->mockOut, deckModel->inPort);
+        addCoupling(mockControllerModel->commandOutPort, deckModel->commandInPort);
+        addCoupling(mockControllerModel->playerOutPort, deckModel->playerInPort);
     }
 };
 

@@ -50,7 +50,7 @@ class thresholdC: public Atomic<thresholdCState> {
 
     void output(const thresholdCState& state) const override {
     // Here, we can add message to output ports.
-        decision res = state.threshold > state.comparisonValue ? HIT : STAND;
+        decision res = state.threshold > state.comparisonValue ? decision::HIT : decision::STAND;
 
         decisionOut->addMessage(res);
         if(res == decision::STAND){

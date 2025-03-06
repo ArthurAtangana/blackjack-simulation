@@ -8,6 +8,7 @@ using namespace cadmium;
 #include "cadmium/modeling/devs/atomic.hpp"
 #include "src/shared_data/commands.hpp"
 #include "src/shared_data/cards.hpp"
+#include "src/shared_data/players.hpp"
 
 enum class DeckActions {
     IDLE,
@@ -44,7 +45,6 @@ struct deckState {
         for (int i = 1; i < static_cast<int>(Cards::KING)+1; ++i) {
             for (int j = 0; j < 4; ++j) {  // Add each element 4 times
                 cards.push_back(static_cast<Cards>(i));
-                
             }
         }
     }
@@ -70,16 +70,19 @@ std::ostream& operator<<(std::ostream &out, const deckState& state) {
 #endif
 
 class deck : public Atomic<deckState> {
-    //Declare your ports here
     public:
-    Port<deckCommand> inPort;
+    //in port
+    Port<deckCommand> commandInPort;
+    Port<Players> playerInPort;
+    //out port
     Port<cardOut> cardOutPort;
     Port<decision> hitOutPort;
 
     deck(const std::string id) : Atomic<deckState>(id, deckState()) {
         //Constructor of your atomic model. Initialize ports here.
         //Initialize input ports
-        inPort = addInPort<deckCommand>("inPort");
+        commandInPort = addInPort<deckCommand>("commandInPort");
+        playerInPort = addInPort<Players>("playerInPort");
 
         //Initialize output ports
         cardOutPort = addOutPort<cardOut>("cardOutPort");
@@ -108,12 +111,21 @@ class deck : public Atomic<deckState> {
     // external transition
     void externalTransition(deckState& state, double e) const override {
         //your external transition function hoes here
-        std::vector<deckCommand> inPortMsg = inPort->getBag();
-        if (!inPortMsg.empty()){
-            switch (inPortMsg.back()) {
-                case deckCommand::DRAW_CHALLENGER: state.state = DeckActions::DRAW_CHALLENGER; break;
-                case deckCommand::DRAW_DEALER: state.state = DeckActions::DRAW_DEALER; break;
+        if (!commandInPort->empty()){
+            const auto commandLastInput = (commandInPort->getBag()).back();
+            switch (commandLastInput) {
                 case deckCommand::SHUFFLE: state.state = DeckActions::SHUFFLE; break;
+                case deckCommand::DRAW:
+                    if (!playerInPort->empty()){
+                        const auto playerLastInput = (playerInPort->getBag()).back();
+                        if (playerLastInput == Players::CHALLENGER) {
+                            state.state = DeckActions::DRAW_CHALLENGER;
+                        }
+                        else if (playerLastInput == Players::DEALER) {
+                            state.state = DeckActions::DRAW_DEALER;
+                        }
+                    }
+                    break;
             }
         }
     }
