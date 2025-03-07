@@ -1,6 +1,5 @@
 #include <limits>
 #include "include/test/test_couplings/controller_test.hpp"
-#include "include/test/test_couplings/deck_file_test.hpp"
 #include "include/test/test_couplings/thresholdC_test.hpp"
 #include "include/test/test_couplings/thresholdD_test.hpp"
 #include "include/test/test_couplings/challenger_test.hpp"
@@ -52,12 +51,11 @@ extern "C" {
 		// auto model = std::make_shared<handTest> ("hand_test");
 		// auto model = std::make_shared<challengerTest> ("challengerTest");
 		// auto model = std::make_shared<dealerTest> ("dealerTest");
-		// auto model = std::make_shared<deck_test> ("deck_test");
+		auto model = std::make_shared<deck_test> ("deck_test");
 		// auto model = std::make_shared<handTest> ("hand_test");
 		// auto model = std::make_shared<challenger> ("challenger");
 		// auto model = std::make_shared<playersTest> ("players_test");
 		// auto model = std::make_shared<controllerTest> ("controllerTest");
-		auto model = std::make_shared<deck_input_test> ("deck_input_test");
 
 		
 		#ifdef SIM_TIME
