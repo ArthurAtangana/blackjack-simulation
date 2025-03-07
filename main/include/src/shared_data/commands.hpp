@@ -7,7 +7,7 @@ enum class deckCommand {
     SHUFFLE,
     DRAW
 };
-
+// Overloads out << operator for output
 inline std::ostream& operator<<(std::ostream& out, const deckCommand& command) {
     switch (command) {
         case deckCommand::SHUFFLE: out << "SHUFFLE"; break;
@@ -16,7 +16,25 @@ inline std::ostream& operator<<(std::ostream& out, const deckCommand& command) {
     }
     return out;
 }
+// Overload the >> operator for input
+inline std::istream& operator>>(std::istream& in, deckCommand& command) {
+    std::string value;
+    in >> value;
 
+    static const std::unordered_map<std::string, deckCommand> commandMap = {
+        {"SHUFFLE", deckCommand::SHUFFLE},
+        {"DRAW", deckCommand::DRAW}
+    };
+
+    auto it = commandMap.find(value);
+    if (it != commandMap.end()) {
+        command = it->second;
+    } else {
+        in.setstate(std::ios::failbit);  // Set fail state if invalid
+    }
+
+    return in;
+}
 enum class decision{
     HIT,
     STAND
