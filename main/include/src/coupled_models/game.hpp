@@ -12,8 +12,9 @@
 
 class game: public cadmium::Coupled {
 public:
+
     //Out ports
-    Port<int> startOutPort;
+    Port<int> gameStartInPort;
     Port<outcome> outcomeOutPort;
 
     game(const std::string& id) : Coupled(id) {
@@ -23,11 +24,11 @@ public:
         auto playersModel = addComponent<players>("players");
 
         //Add Ports
-        startOutPort = addOutPort<int>("startOutPort");
+        gameStartInPort = addInPort<int>("gameStartInPort");
         outcomeOutPort = addOutPort<outcome>("outcomeOutPort");
 
         //External Couplings
-        addCoupling(this->startOutPort, controllerModel->startInPort);
+        addCoupling(this->gameStartInPort, controllerModel->startInPort);
         addCoupling(controllerModel->outcomeOutPort, this->outcomeOutPort);
 
         //Internal Couplings
