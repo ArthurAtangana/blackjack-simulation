@@ -9,5 +9,5 @@
 ],
   "linkDataArray": [
 {"from":-1,"to":-2,"fromPort":"T","toPort":"T","points":[-290,-412.5,-290,-422.5,-70,-422.5,-70,-419.25,-70,-416,-70,-406],"label":"value_in?value"},
-{"points":[-70,-314,-70,-304,-290,-304,-290,-310.75,-290,-317.5,-290,-327.5],"dash_array":[6,3],"from":-2,"to":-1,"fromPort":"B","toPort":"B","label":"decision_out!decision"}
+{"points":[-70,-314,-70,-304,-290,-304,-290,-310.75,-290,-317.5,-290,-327.5],"dash_array":[6,3],"from":-2,"to":-1,"fromPort":"B","toPort":"B","label":"decision_out!decision\nvalue_out!value"}
 ]}

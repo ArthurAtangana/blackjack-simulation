@@ -17,7 +17,8 @@ $$ v \in X \cup\{0\}$$
 ## Y - Outputs
 Decisions to take, based on the comparison between the threshold and input value (see output function).
 Note: STAND appends the player score at the end which shares the range of $v$.
-$$ Y = \{HIT, STAND\_v\} $$
+$$ Y = (d, v) $$
+$$ d \in \{HIT, STAND\} $$
 $$ v \in X \cup\{0\}$$
 
 ## $\delta_{int}$ - Internal transitions
@@ -46,6 +47,6 @@ Ignore when v = 0, infinite ta. When the value meets the threshold (or above), t
 Otherwise, keep hitting (HIT).
 
 $$ \begin{align}
-\lambda(s) =\ & \{ if  &s_t > s_v & \quad then\ HIT \\
-&\ else && \quad then \ STAND\_v
+\lambda(s) =\ & \{ if  &s_t > s_v & \quad then\ (HIT, 0) \\
+&\ else && \quad then \ (STAND, s_v)
 \end{align}$$ 
