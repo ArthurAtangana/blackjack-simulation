@@ -11,6 +11,7 @@ using namespace cadmium;
 #include "src/shared_data/players.hpp"
 
 
+
 // name of the states, as actions to be performed
 enum controllerActions {
     START,
@@ -36,7 +37,6 @@ struct controllerState {
     int challenger_score; // s2
     int dealer_score; // s3
     controllerActions state; // s4
-    outcome result; // REMOVE - Refactors can be done in output, and internal transition. Issue #30
     double sigma;
 
     //Instantiate
@@ -44,18 +44,39 @@ struct controllerState {
     current_player(Players::CHALLENGER),
     challenger_score(0),
     dealer_score(0),
-    state(controllerActions::IDLE),
-    result(outcome::CONTINUE) {
+    state(controllerActions::IDLE) {
         sigma = std::numeric_limits<double>::infinity();
     }
 };
 
 #ifndef NO_LOGGING
 std::ostream& operator<<(std::ostream &out, const controllerState& state) {
-    out << "State(controller): Player Score= " << state.challenger_score << ", Dealer Score= " << state.dealer_score << "\n Current player: " << state.current_player << "\n Outcome: " <<state.result << "\n";
+    out << "State(controller): Player Score= " << state.challenger_score << ", Dealer Score= " << state.dealer_score << "\n Current player: " << state.current_player << "\n";
     return out;
 }
 #endif
+
+// check winner funtion
+outcome check_winner(const controllerState& state) {
+    if (state.dealer_score > 21) {
+        return outcome::WIN;
+    }
+    else if (state.challenger_score > 21) {
+        return outcome::LOSE;
+        }
+    else if (state.dealer_score != 0) {
+        if (state.challenger_score > state.dealer_score) {
+            return outcome::WIN;
+        }
+        else if (state.challenger_score < state.dealer_score) {
+            return outcome::LOSE;
+        }
+        else {
+            return outcome::TIE;
+        }
+    }
+    return outcome::CONTINUE;
+}
 
 class controller : public Atomic<controllerState> {
     //Declare your ports here
@@ -100,37 +121,14 @@ class controller : public Atomic<controllerState> {
         }
         // STAND:
         else if (state.state == controllerActions::STAND){
-            // TODO: check_winner -> if not CONTINUE (no winner), short-circuit
-            //  short-circuit: controller -> IDLE
-            //  otherwise: set dealer, set hit.
-
-            if (state.current_player == Players::CHALLENGER){ // CHALLENGER STAND
-                if (state.challenger_score > 21){ // Check if CHALLENGER bust
-                    state.result = outcome::LOSE;
-                    state.state = controllerActions::IDLE;
-                    state.sigma = std::numeric_limits<double>::infinity();;
-                }
-                else { // next player (DEALER)
-                    state.result = outcome::CONTINUE;
-                    state.current_player = Players::DEALER;
-                    state.state = controllerActions::HIT;
-                }
-            }
-            else { // DEALER STAND
-                if (state.dealer_score > 21) { // Check if DEALER bust -> CHALLENGER WIN
-                    state.result = outcome::WIN;
-                }
-                else if (state.dealer_score < state.challenger_score) { // CHALLENGER win
-                    state.result = outcome::WIN;
-                }
-                else if (state.dealer_score > state.challenger_score) { // CHALLENGER lose
-                    state.result = outcome::LOSE;
-                }
-                else if (state.dealer_score == state.challenger_score) { // CHALLENGER tie
-                    state.result = outcome::TIE;
-                }
+            if (check_winner(state) != outcome::CONTINUE){
                 state.state == controllerActions::IDLE;
                 state.sigma = std::numeric_limits<double>::infinity();;
+
+            }
+            else { // next player (DEALER)
+                state.current_player = Players::DEALER;
+                state.state = controllerActions::HIT;
             }
         }
     }
@@ -179,25 +177,7 @@ class controller : public Atomic<controllerState> {
             playerOutPort->addMessage(state.current_player);
         }
         else if (state.state == controllerActions::STAND){
-            // FIXME: simply call new function "check_winner" here
-            //  outcomeOutPort->addMessage(check_winner());
-            if (state.dealer_score > 21) {
-                outcomeOutPort->addMessage(outcome::WIN);
-            }
-            else if (state.challenger_score > 21) {
-                outcomeOutPort->addMessage(outcome::LOSE);
-            }
-            else if (state.dealer_score != 0) {
-                if (state.challenger_score > state.dealer_score) {
-                    outcomeOutPort->addMessage(outcome::WIN);
-                }
-                else if (state.challenger_score < state.dealer_score) {
-                    outcomeOutPort->addMessage(outcome::LOSE);
-                }
-                else {
-                    outcomeOutPort->addMessage(outcome::TIE);
-                }
-            }
+            outcomeOutPort->addMessage(check_winner(state));
         }
     }
 
