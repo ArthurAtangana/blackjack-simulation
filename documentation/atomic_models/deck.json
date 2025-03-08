@@ -6,11 +6,14 @@
   "nodeDataArray": [
 {"text":"idle","figure":"Ellipse","size":"82 85","fill":"white","key":-1,"loc":"-120 -130"},
 {"text":"shuffles","figure":"Ellipse","size":"85 85","fill":"white","key":-6,"loc":"150 -130"},
-{"text":"draw\ndeck_cards-1","figure":"Ellipse","size":"85 85","fill":"white","key":-3,"loc":"-410 -130"}
+{"text":"draw(deck)","figure":"Ellipse","size":"93 85","fill":"white","key":-3,"loc":"-406 -130"},
+{"text":"draw(deck)","figure":"Ellipse","size":"93 87","fill":"white","key":-4,"loc":"-526 -129"}
 ],
   "linkDataArray": [
 {"from":-1,"to":-6,"fromPort":"T","toPort":"T","points":[-120,-172.5,-120,-182.5,150,-182.5,150,-182.5,150,-182.5,150,-172.5],"label":"cmd_in?shuffle"},
-{"from":-1,"to":-3,"fromPort":"T","toPort":"T","points":[-120,-172.5,-120,-182.5,-410,-182.5,-410,-182.5,-410,-182.5,-410,-172.5],"label":"cmd_in?draw"},
+{"from":-1,"to":-3,"fromPort":"T","toPort":"T","points":[-120,-172.5,-120,-182.5,-406,-182.5,-406,-182.5,-406,-182.5,-406,-172.5],"label":"cmd_in?draw\nplayer_in?dealer"},
 {"points":[150,-87.5,150,-77.5,-120,-77.5,-120,-77.5,-120,-77.5,-120,-87.5],"dash_array":[6,3],"from":-6,"to":-1,"toPort":"B","fromPort":"B","label":"update_out!updated"},
-{"points":[-410,-87.5,-410,-77.5,-120,-77.5,-120,-77.5,-120,-77.5,-120,-87.5],"dash_array":[6,3],"from":-3,"to":-1,"toPort":"B","fromPort":"B","label":"card_out!card"}
+{"points":[-406,-87.5,-406,-77.5,-120,-77.5,-120,-77.5,-120,-77.5,-120,-87.5],"dash_array":[6,3],"from":-3,"to":-1,"toPort":"B","fromPort":"B","label":"dealer_out!card"},
+{"from":-1,"to":-4,"fromPort":"T","toPort":"T","points":[-120,-172.5,-120,-182.5,-120,-242.74609670057313,-526,-242.74609670057313,-526,-182.5,-526,-172.5],"label":"cmd_in?draw\nplayer_in?challenger"},
+{"points":[-526,-85.5,-526,-75.5,-526,-44.23110383763315,-120,-44.23110383763315,-120,-77.5,-120,-87.5],"dash_array":[6,3],"from":-4,"to":-1,"fromPort":"B","toPort":"B","label":"player_out!card"}
 ]}
