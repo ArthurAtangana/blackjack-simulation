@@ -2,13 +2,14 @@
 ![controller model](controller.png)
 
 ## X - Inputs
-The possible inputs are Start, to start the game and decisions by the players. 
-A player can ask to HIT to draw another card, and stand to stop drawing. 
-Stand also reports the final score value of the player.
+Start: Input to start the game. 
+Decisions: A player can ask to HIT to draw another card, and stand to stop drawing. 
+Score: Final score reported when a player stands.
 
-$$ v \in \mathbb{N} \cap [1,30]$$
-$$X = {START, HIT, STAND\_v}$$
-Note: Stand also encodes a score value after the underscore, as denoted by $v$.
+$$X = (start, decision, score)$$
+$$ score \in \mathbb{N} \cap [1,30]$$
+$$ decision \in \{HIT, STAND\}$$
+$$ start \in \mathbb{B}$$
 
 ## S - States
 The state of the controller is composed of four components. 
@@ -22,10 +23,12 @@ $$ s4 \in X \cup \{IDLE, CHECK\_WINNER\}$$
 $$ S = \{(s1,s2,s3,s4)\} $$
 
 ## Y - Outputs
-The controller outputs commands (C), and game outcomes (O).
-$$ C = \{SHUFFLE, DRAW\_CHALLENGER, DRAW\_DEALER\}$$
-$$ O = \{WIN, TIE, LOSS\}$$
-$$ Y = C \cup O $$
+The controller outputs commands, and game outcomes. 
+It also makes use of players to communicate who to draw for.
+$$ Y =  (command, player, outcome)$$
+$$ command \in \{SHUFFLE, DRAW\}$$
+$$ player \in \{CHALLENGER, DEALER\}$$
+$$ outcome \in \{WIN, TIE, LOSS\}$$
 
 ## $\delta$<sub>int</sub> - Internal transitions
 The internal transition behaviour is strongly dependent on the value in $s_4$, 
@@ -73,9 +76,10 @@ check\_winner(chal, deal) = \{\ &if\ chal > 21 &then\ LOSE \\
 $$
 
 ### Output function
+Note: _ indicates no output for that port
 $$ \begin{align}
-lambda(s) = \{\ &if\ s_4=HIT &then\ DRAW\_(s1) \\
-& if\ s_4=START &then\ SHUFFLE \\
-& if\ s_4=CHECK\_WINNER\ &then\ check\_winner(s2, s3)\} 
+lambda(s) = \{\ &if\ s_4=HIT &then\ (DRAW, s_1, \_) \\
+& if\ s_4=START &then\ (SHUFFLE, \_, \_)  \\
+& if\ s_4=CHECK\_WINNER\ &then\ (\_, \_, check\_winner(s2, s3))\} 
 \end{align}
 $$

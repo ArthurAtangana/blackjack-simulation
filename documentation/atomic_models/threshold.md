@@ -17,7 +17,7 @@ $$ v \in X \cup\{0\}$$
 ## Y - Outputs
 Decisions to take, based on the comparison between the threshold and input value (see output function).
 Note: STAND appends the player score at the end which shares the range of $v$.
-$$ Y = \{(d, v)\} $$
+$$ Y = (d, v) $$
 $$ d \in \{HIT, STAND\} $$
 $$ v \in X \cup\{0\}$$
 
