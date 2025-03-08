@@ -18,7 +18,7 @@ the last input ($s_4$). We add the IDLE to s4 to idle in-between inputs.
 
 $$ s1 \in \{CHALLENGER, DEALER\}$$
 $$ s2, s3 \in \mathbb{N} \cap [1,30]$$
-$$ s4 \in X \cup \{IDLE\}$$
+$$ s4 \in decision \cup \{IDLE\}$$
 $$ S = \{(s1,s2,s3,s4)\} $$
 
 ## Y - Outputs
