@@ -18,7 +18,8 @@ M = {challenger, dealer}
 EIC = {(players.card_dealer, dealer.card), (players.card_challenger, challenger.card)}
 
 ## EOC - External Output Couplings
-EOC = {(challenger.decision, players.decision), (dealer.decision, players.decision)}
+EOC = {(challenger.decision, players.decision), (dealer.decision, players.decision),
+(players.dealerIn, dealer.cardIn), (players.challengerIn, challenger.cardIn)}
 
 ## IC - Internal Couplings
 IC = $\emptyset$ 

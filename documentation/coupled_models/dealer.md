@@ -14,10 +14,13 @@ M = {hand, threshold}
 ## EIC - [External Input Couplings
 EIC = {dealer.card->hand.card}
 ## EOC - External Output Couplings
-EOC = {threshold.decision->dealer.decision}
+EOC = {(dealer.cardIn->hand.cardIn),
+(threshold.decision->dealer.decision),
+(threshold.valueOut->dealer.scoreOut),
+}
 
 ## IC - Internal Couplings
-IC = {hand.count->threshold.count}
+IC = {hand.handValueOut->threshold.valueIn}
 
 ## Select
 It's better to take the decision of the previous turn first before processing the updated hand.

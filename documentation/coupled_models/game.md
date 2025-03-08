@@ -12,13 +12,15 @@
 {(game.start,controller.start)}
 
 ## EOC - External Output Couplings
-{(controller.outcome,game.out)}
+{(controller.outcome,game.out), (game.gameStartIn,controller.startIn)}
 
 ## IC - Internal Couplings
 {
  (controller.cmd,deck.cmd),
- (deck.card_(player),player.card_(player)),
- (deck.HIT,controller.HIT),
+ (controller.player,deck.player),
+ (deck.challengerOut,player.challengerIn),
+ (deck.dealerOut,player.dealerIn),
+ (deck.hitOut,controller.decision),
  (players.decision,controller.decision),
 }
 
