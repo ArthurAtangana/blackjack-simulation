@@ -11,6 +11,7 @@ using namespace cadmium;
 #include "src/shared_data/players.hpp"
 
 
+
 // name of the states, as actions to be performed
 enum controllerActions {
     START,
@@ -57,6 +58,28 @@ std::ostream& operator<<(std::ostream &out, const controllerState& state) {
 }
 #endif
 
+// check winner funtion
+outcome check_winner(const controllerState& state) {
+    if (state.dealer_score > 21) {
+        return outcome::WIN;
+    }
+    else if (state.challenger_score > 21) {
+        return outcome::LOSE;
+        }
+    else if (state.dealer_score != 0) {
+        if (state.challenger_score > state.dealer_score) {
+            return outcome::WIN;
+        }
+        else if (state.challenger_score < state.dealer_score) {
+            return outcome::LOSE;
+        }
+        else {
+            return outcome::TIE;
+        }
+    }
+    return outcome::CONTINUE;
+}
+
 class controller : public Atomic<controllerState> {
     //Declare your ports here
     public:
@@ -100,10 +123,6 @@ class controller : public Atomic<controllerState> {
         }
         // STAND:
         else if (state.state == controllerActions::STAND){
-            // TODO: check_winner -> if not CONTINUE (no winner), short-circuit
-            //  short-circuit: controller -> IDLE
-            //  otherwise: set dealer, set hit.
-
             if (state.current_player == Players::CHALLENGER){ // CHALLENGER STAND
                 if (state.challenger_score > 21){ // Check if CHALLENGER bust
                     state.result = outcome::LOSE;
@@ -179,25 +198,7 @@ class controller : public Atomic<controllerState> {
             playerOutPort->addMessage(state.current_player);
         }
         else if (state.state == controllerActions::STAND){
-            // FIXME: simply call new function "check_winner" here
-            //  outcomeOutPort->addMessage(check_winner());
-            if (state.dealer_score > 21) {
-                outcomeOutPort->addMessage(outcome::WIN);
-            }
-            else if (state.challenger_score > 21) {
-                outcomeOutPort->addMessage(outcome::LOSE);
-            }
-            else if (state.dealer_score != 0) {
-                if (state.challenger_score > state.dealer_score) {
-                    outcomeOutPort->addMessage(outcome::WIN);
-                }
-                else if (state.challenger_score < state.dealer_score) {
-                    outcomeOutPort->addMessage(outcome::LOSE);
-                }
-                else {
-                    outcomeOutPort->addMessage(outcome::TIE);
-                }
-            }
+            outcomeOutPort->addMessage(check_winner(state));
         }
     }
 

@@ -52,11 +52,11 @@ extern "C" {
 		// auto model = std::make_shared<handTest> ("hand_test");
 		// auto model = std::make_shared<challengerTest> ("challengerTest");
 		// auto model = std::make_shared<dealerTest> ("dealerTest");
-		auto model = std::make_shared<deck_test> ("deck_test");
+		// auto model = std::make_shared<deck_test> ("deck_test");
 		// auto model = std::make_shared<handTest> ("hand_test");
 		// auto model = std::make_shared<challenger> ("challenger");
 		// auto model = std::make_shared<playersTest> ("players_test");
-		// auto model = std::make_shared<controllerTest> ("controllerTest");
+		auto model = std::make_shared<controllerTest> ("controllerTest");
 
 		
 		#ifdef SIM_TIME
