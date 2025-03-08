@@ -2,7 +2,7 @@
 ![deck model](deck.png)
 
 ## X - Inputs
-{shuffle, DRAW_\CHALLENGER, DRAW_\DEALER}
+ {SHUFFLE, DRAW_CHALLENGER, DRAW_DEALER}
 - Shuffle: shuffles the cards in the deck
 - draw_X: draw one card in the deck, for the named player (X).
 ## S - States
