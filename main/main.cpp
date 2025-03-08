@@ -12,6 +12,7 @@
 #include "include/src/coupled_models/challenger.hpp"
 #include "include/test/test_couplings/hand_test.hpp"
 #include "include/src/coupled_models/challenger.hpp"
+#include "include/src/coupled_models/game.hpp"
 
 /*
 There are 3 macros defined at compile time that changes the behaviour of the simulation.
