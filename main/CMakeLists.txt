@@ -3,6 +3,9 @@ if(ESP_PLATFORM)
     idf_component_register( SRCS "main.cpp"
                             REQUIRES driver
                             INCLUDE_DIRS "." "include" $ENV{CADMIUM})
+    idf_component_register( SRCS "deck_test.cpp"
+                            REQUIRES driver
+                            INCLUDE_DIRS "." "include" $ENV{CADMIUM})
 
     target_compile_options(${COMPONENT_LIB} PUBLIC -std=gnu++2b)
     target_compile_options(${COMPONENT_LIB} PRIVATE "-Wno-format")
@@ -15,10 +18,13 @@ else()
 
     # Regular CMake project setup for non-ESP32
     add_executable(${projectName} main.cpp)
+    add_executable("deck_test" deck_main.cpp)
 
     # Add required libraries and include directories
     target_include_directories(${projectName} PRIVATE "." "include" $ENV{CADMIUM})
+    target_include_directories("deck_test" PRIVATE "." "include" $ENV{CADMIUM})
 
     # Non-ESP32 specific compile options
     target_compile_options(${projectName} PUBLIC -std=gnu++2b)
+    target_compile_options("deck_test" PUBLIC -std=gnu++2b)
 endif()
