@@ -1,5 +1,5 @@
-#ifndef CONTROLLER_TEST_HPP
-#define CONTROLLER_TEST_HPP
+#ifndef CONTROLLER_LOSE_TEST_HPP
+#define CONTROLLER_LOSE_TEST_HPP
 
 
 #include "cadmium/modeling/devs/coupled.hpp" //cadmium header
@@ -10,9 +10,9 @@
 
 using namespace cadmium;
 
-class controller_test: public cadmium::Coupled {
+class controller_lose_test: public cadmium::Coupled {
 public:
-    controller_test(const std::string& id) : Coupled(id) {
+    controller_lose_test(const std::string& id) : Coupled(id) {
         //Create model instances
         
         auto controllerModel = addComponent<controller>("controller");

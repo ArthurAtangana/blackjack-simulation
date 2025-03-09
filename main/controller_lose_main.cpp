@@ -1,5 +1,5 @@
 #include <limits>
-#include "include/test/test_couplings/controller_test.hpp"
+#include "include/test/test_couplings/controller_lose_test.hpp"
 
 /*
 There are 3 macros defined at compile time that changes the behaviour of the simulation.
@@ -35,7 +35,7 @@ extern "C" {
 	#endif
 	{
 	
-		auto model = std::make_shared<controller_test> ("controller_test");
+		auto model = std::make_shared<controller_lose_test> ("controller_lose_test");
 
 		
 		#ifdef SIM_TIME
