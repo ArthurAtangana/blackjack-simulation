@@ -1,4 +1,10 @@
 # Scripts
+## dealer_test
+Tests the entire dealer component, as per the experimental strategy description.
+
+## challenger_test
+Tests the entire challenger component, as per the experimental strategy description.
+
 ## hand_cumulative
 Tests the hand component with a cumulative input, as per the first test in the experimental strategy description.
 
