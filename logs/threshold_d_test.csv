@@ -1,0 +1,34 @@
+sep=;
+time;model_id;model_name;port_name;data
+0;1;threshold-d-input;;0
+0;2;threshold-d;;{threshold: 17, comparisonValue: 0}
+0;1;threshold-d-input;out;17
+0;1;threshold-d-input;;5
+0;2;threshold-d;;{threshold: 17, comparisonValue: 17}
+0.1;2;threshold-d;decisionOut;STAND
+0.1;2;threshold-d;valueOut;17
+0.1;2;threshold-d;;{threshold: 17, comparisonValue: 0}
+5;1;threshold-d-input;out;18
+5;1;threshold-d-input;;5
+5;2;threshold-d;;{threshold: 17, comparisonValue: 18}
+5.1;2;threshold-d;decisionOut;STAND
+5.1;2;threshold-d;valueOut;18
+5.1;2;threshold-d;;{threshold: 17, comparisonValue: 0}
+10;1;threshold-d-input;out;16
+10;1;threshold-d-input;;5
+10;2;threshold-d;;{threshold: 17, comparisonValue: 16}
+10.1;2;threshold-d;decisionOut;HIT
+10.1;2;threshold-d;;{threshold: 17, comparisonValue: 0}
+15;1;threshold-d-input;out;1
+15;1;threshold-d-input;;5
+15;2;threshold-d;;{threshold: 17, comparisonValue: 1}
+15.1;2;threshold-d;decisionOut;HIT
+15.1;2;threshold-d;;{threshold: 17, comparisonValue: 0}
+20;1;threshold-d-input;out;44
+20;1;threshold-d-input;;inf
+20;2;threshold-d;;{threshold: 17, comparisonValue: 44}
+20.1;2;threshold-d;decisionOut;STAND
+20.1;2;threshold-d;valueOut;44
+20.1;2;threshold-d;;{threshold: 17, comparisonValue: 0}
+20.1;1;threshold-d-input;;inf
+20.1;2;threshold-d;;{threshold: 17, comparisonValue: 0}

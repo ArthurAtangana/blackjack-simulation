@@ -1,0 +1,108 @@
+sep=;
+time;model_id;model_name;port_name;data
+0;1;challenger cards;;1
+0;2;dealer cards;;2
+0;5;hand;;{value: 0, card: NO CARD}
+0;6;threshold-c;;{threshold: 15, comparisonValue: 0}
+0;8;hand;;{value: 0, card: NO CARD}
+0;9;threshold-d;;{threshold: 17, comparisonValue: 0}
+1;1;challenger cards;out;2
+1;1;challenger cards;;2
+1;5;hand;;{value: 0, card: 2}
+1.1;5;hand;handValueOut;2
+1.1;5;hand;;{value: 2, card: NO CARD}
+1.1;6;threshold-c;;{threshold: 15, comparisonValue: 2}
+1.2;6;threshold-c;decisionOut;HIT
+1.2;6;threshold-c;;{threshold: 15, comparisonValue: 0}
+2;2;dealer cards;out;7
+2;2;dealer cards;;2
+2;8;hand;;{value: 0, card: 7}
+2.1;8;hand;handValueOut;7
+2.1;8;hand;;{value: 7, card: NO CARD}
+2.1;9;threshold-d;;{threshold: 17, comparisonValue: 7}
+2.2;9;threshold-d;decisionOut;HIT
+2.2;9;threshold-d;;{threshold: 17, comparisonValue: 0}
+3;1;challenger cards;out;3
+3;1;challenger cards;;2
+3;5;hand;;{value: 2, card: 3}
+3.1;5;hand;handValueOut;5
+3.1;5;hand;;{value: 5, card: NO CARD}
+3.1;6;threshold-c;;{threshold: 15, comparisonValue: 5}
+3.2;6;threshold-c;decisionOut;HIT
+3.2;6;threshold-c;;{threshold: 15, comparisonValue: 0}
+4;2;dealer cards;out;9
+4;2;dealer cards;;2
+4;8;hand;;{value: 7, card: 9}
+4.1;8;hand;handValueOut;16
+4.1;8;hand;;{value: 16, card: NO CARD}
+4.1;9;threshold-d;;{threshold: 17, comparisonValue: 16}
+4.2;9;threshold-d;decisionOut;HIT
+4.2;9;threshold-d;;{threshold: 17, comparisonValue: 0}
+5;1;challenger cards;out;5
+5;1;challenger cards;;2
+5;5;hand;;{value: 5, card: 5}
+5.1;5;hand;handValueOut;10
+5.1;5;hand;;{value: 10, card: NO CARD}
+5.1;6;threshold-c;;{threshold: 15, comparisonValue: 10}
+5.2;6;threshold-c;decisionOut;HIT
+5.2;6;threshold-c;;{threshold: 15, comparisonValue: 0}
+6;2;dealer cards;out;A
+6;2;dealer cards;;2
+6;8;hand;;{value: 16, card: A}
+6.1;8;hand;handValueOut;17
+6.1;8;hand;;{value: 17, card: NO CARD}
+6.1;9;threshold-d;;{threshold: 17, comparisonValue: 17}
+6.2;9;threshold-d;decisionOut;STAND
+6.2;9;threshold-d;valueOut;17
+6.2;9;threshold-d;;{threshold: 17, comparisonValue: 0}
+7;1;challenger cards;out;5
+7;1;challenger cards;;2
+7;5;hand;;{value: 10, card: 5}
+7.1;5;hand;handValueOut;15
+7.1;5;hand;;{value: 15, card: NO CARD}
+7.1;6;threshold-c;;{threshold: 15, comparisonValue: 15}
+7.2;6;threshold-c;decisionOut;STAND
+7.2;6;threshold-c;valueOut;15
+7.2;6;threshold-c;;{threshold: 15, comparisonValue: 0}
+8;2;dealer cards;out;A
+8;2;dealer cards;;inf
+8;8;hand;;{value: 17, card: A}
+8.1;8;hand;handValueOut;18
+8.1;8;hand;;{value: 18, card: NO CARD}
+8.1;9;threshold-d;;{threshold: 17, comparisonValue: 18}
+8.2;9;threshold-d;decisionOut;STAND
+8.2;9;threshold-d;valueOut;18
+8.2;9;threshold-d;;{threshold: 17, comparisonValue: 0}
+9;1;challenger cards;out;5
+9;1;challenger cards;;2
+9;5;hand;;{value: 15, card: 5}
+9.1;5;hand;handValueOut;20
+9.1;5;hand;;{value: 20, card: NO CARD}
+9.1;6;threshold-c;;{threshold: 15, comparisonValue: 20}
+9.2;6;threshold-c;decisionOut;STAND
+9.2;6;threshold-c;valueOut;20
+9.2;6;threshold-c;;{threshold: 15, comparisonValue: 0}
+11;1;challenger cards;out;K
+11;1;challenger cards;;2
+11;5;hand;;{value: 20, card: K}
+11.1;5;hand;handValueOut;30
+11.1;5;hand;;{value: 30, card: NO CARD}
+11.1;6;threshold-c;;{threshold: 15, comparisonValue: 30}
+11.2;6;threshold-c;decisionOut;STAND
+11.2;6;threshold-c;valueOut;30
+11.2;6;threshold-c;;{threshold: 15, comparisonValue: 0}
+13;1;challenger cards;out;A
+13;1;challenger cards;;inf
+13;5;hand;;{value: 30, card: A}
+13.1;5;hand;handValueOut;31
+13.1;5;hand;;{value: 31, card: NO CARD}
+13.1;6;threshold-c;;{threshold: 15, comparisonValue: 31}
+13.2;6;threshold-c;decisionOut;STAND
+13.2;6;threshold-c;valueOut;31
+13.2;6;threshold-c;;{threshold: 15, comparisonValue: 0}
+13.2;1;challenger cards;;inf
+13.2;2;dealer cards;;inf
+13.2;5;hand;;{value: 31, card: NO CARD}
+13.2;6;threshold-c;;{threshold: 15, comparisonValue: 0}
+13.2;8;hand;;{value: 18, card: NO CARD}
+13.2;9;threshold-d;;{threshold: 17, comparisonValue: 0}

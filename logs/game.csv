@@ -1,0 +1,111 @@
+sep=;
+time;model_id;model_name;port_name;data
+0;1;start;;0
+0;5;hand;;{value: 0, card: NO CARD}
+0;6;threshold-c;;{threshold: 15, comparisonValue: 0}
+0;8;hand;;{value: 0, card: NO CARD}
+0;9;threshold-d;;{threshold: 17, comparisonValue: 0}
+0;10;deck;;State: IDLE, cards remaining: 52
+Current Order: [A,A,A,A,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9,10,10,10,10,J,J,J,J,Q,Q,Q,Q,K,K,K,K,]
+
+0;11;controller;;State(controller): Player Score= 0, Dealer Score= 0
+ Current player: CHALLENGER
+
+0;1;start;out;1
+0;1;start;;inf
+0;11;controller;;State(controller): Player Score= 0, Dealer Score= 0
+ Current player: CHALLENGER
+
+1;10;deck;;State: SHUFFLE, cards remaining: 52
+Current Order: [A,A,A,A,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9,10,10,10,10,J,J,J,J,Q,Q,Q,Q,K,K,K,K,]
+
+1;11;controller;commandOutPort;SHUFFLE
+1;11;controller;;State(controller): Player Score= 0, Dealer Score= 0
+ Current player: CHALLENGER
+
+11;10;deck;hitOutPort;HIT
+11;10;deck;;State: IDLE, cards remaining: 52
+Current Order: [5,K,4,10,9,Q,4,10,J,5,10,A,8,A,7,J,A,2,6,K,9,7,5,A,6,J,Q,3,6,2,8,7,2,5,K,Q,2,6,7,4,J,10,K,9,4,3,8,3,8,9,Q,3,]
+
+11;11;controller;;State(controller): Player Score= 0, Dealer Score= 0
+ Current player: CHALLENGER
+
+12;10;deck;;State: DRAW_CHALLENGER, cards remaining: 52
+Current Order: [5,K,4,10,9,Q,4,10,J,5,10,A,8,A,7,J,A,2,6,K,9,7,5,A,6,J,Q,3,6,2,8,7,2,5,K,Q,2,6,7,4,J,10,K,9,4,3,8,3,8,9,Q,3,]
+
+12;11;controller;commandOutPort;DRAW
+12;11;controller;playerOutPort;CHALLENGER
+12;11;controller;;State(controller): Player Score= 0, Dealer Score= 0
+ Current player: CHALLENGER
+
+13;5;hand;;{value: 0, card: 3}
+13;10;deck;challengerCardOutPort;3
+13;10;deck;;State: IDLE, cards remaining: 51
+Current Order: [5,K,4,10,9,Q,4,10,J,5,10,A,8,A,7,J,A,2,6,K,9,7,5,A,6,J,Q,3,6,2,8,7,2,5,K,Q,2,6,7,4,J,10,K,9,4,3,8,3,8,9,Q,]
+
+13.1;5;hand;handValueOut;3
+13.1;5;hand;;{value: 3, card: NO CARD}
+13.1;6;threshold-c;;{threshold: 15, comparisonValue: 3}
+13.2;6;threshold-c;decisionOut;HIT
+13.2;6;threshold-c;;{threshold: 15, comparisonValue: 0}
+13.2;11;controller;;State(controller): Player Score= 0, Dealer Score= 0
+ Current player: CHALLENGER
+
+14.2;10;deck;;State: DRAW_CHALLENGER, cards remaining: 51
+Current Order: [5,K,4,10,9,Q,4,10,J,5,10,A,8,A,7,J,A,2,6,K,9,7,5,A,6,J,Q,3,6,2,8,7,2,5,K,Q,2,6,7,4,J,10,K,9,4,3,8,3,8,9,Q,]
+
+14.2;11;controller;commandOutPort;DRAW
+14.2;11;controller;playerOutPort;CHALLENGER
+14.2;11;controller;;State(controller): Player Score= 0, Dealer Score= 0
+ Current player: CHALLENGER
+
+15.2;5;hand;;{value: 3, card: Q}
+15.2;10;deck;challengerCardOutPort;Q
+15.2;10;deck;;State: IDLE, cards remaining: 50
+Current Order: [5,K,4,10,9,Q,4,10,J,5,10,A,8,A,7,J,A,2,6,K,9,7,5,A,6,J,Q,3,6,2,8,7,2,5,K,Q,2,6,7,4,J,10,K,9,4,3,8,3,8,9,]
+
+15.3;5;hand;handValueOut;13
+15.3;5;hand;;{value: 13, card: NO CARD}
+15.3;6;threshold-c;;{threshold: 15, comparisonValue: 13}
+15.4;6;threshold-c;decisionOut;HIT
+15.4;6;threshold-c;;{threshold: 15, comparisonValue: 0}
+15.4;11;controller;;State(controller): Player Score= 0, Dealer Score= 0
+ Current player: CHALLENGER
+
+16.4;10;deck;;State: DRAW_CHALLENGER, cards remaining: 50
+Current Order: [5,K,4,10,9,Q,4,10,J,5,10,A,8,A,7,J,A,2,6,K,9,7,5,A,6,J,Q,3,6,2,8,7,2,5,K,Q,2,6,7,4,J,10,K,9,4,3,8,3,8,9,]
+
+16.4;11;controller;commandOutPort;DRAW
+16.4;11;controller;playerOutPort;CHALLENGER
+16.4;11;controller;;State(controller): Player Score= 0, Dealer Score= 0
+ Current player: CHALLENGER
+
+17.4;5;hand;;{value: 13, card: 9}
+17.4;10;deck;challengerCardOutPort;9
+17.4;10;deck;;State: IDLE, cards remaining: 49
+Current Order: [5,K,4,10,9,Q,4,10,J,5,10,A,8,A,7,J,A,2,6,K,9,7,5,A,6,J,Q,3,6,2,8,7,2,5,K,Q,2,6,7,4,J,10,K,9,4,3,8,3,8,]
+
+17.5;5;hand;handValueOut;22
+17.5;5;hand;;{value: 22, card: NO CARD}
+17.5;6;threshold-c;;{threshold: 15, comparisonValue: 22}
+17.6;6;threshold-c;decisionOut;STAND
+17.6;6;threshold-c;valueOut;22
+17.6;6;threshold-c;;{threshold: 15, comparisonValue: 0}
+17.6;11;controller;;State(controller): Player Score= 22, Dealer Score= 0
+ Current player: CHALLENGER
+
+18.6;11;controller;outcomeOutPort;LOSE
+18.6;11;controller;;State(controller): Player Score= 22, Dealer Score= 0
+ Current player: CHALLENGER
+
+18.6;1;start;;inf
+18.6;5;hand;;{value: 22, card: NO CARD}
+18.6;6;threshold-c;;{threshold: 15, comparisonValue: 0}
+18.6;8;hand;;{value: 0, card: NO CARD}
+18.6;9;threshold-d;;{threshold: 17, comparisonValue: 0}
+18.6;10;deck;;State: IDLE, cards remaining: 49
+Current Order: [5,K,4,10,9,Q,4,10,J,5,10,A,8,A,7,J,A,2,6,K,9,7,5,A,6,J,Q,3,6,2,8,7,2,5,K,Q,2,6,7,4,J,10,K,9,4,3,8,3,8,]
+
+18.6;11;controller;;State(controller): Player Score= 22, Dealer Score= 0
+ Current player: CHALLENGER
+
