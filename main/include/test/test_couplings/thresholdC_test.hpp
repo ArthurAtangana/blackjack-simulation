@@ -11,7 +11,7 @@ public:
     ThresholdCTest(const std::string& id) : Coupled(id) {
         // Create model instances
         auto thresholdModel = addComponent<thresholdC>("threshold-c");
-        auto mockHandModel = addComponent<mockHand>("mockHand");
+        auto mockHandModel = addComponent<lib::IEStream<int>>("threshold-c_input", "main/include/test/inputs/controller_inputs/threshold_c_in.txt");
 
         addCoupling(mockHandModel->mockOut, thresholdModel->valueIn);
     }
