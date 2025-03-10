@@ -37,6 +37,7 @@ else()
     add_executable("hand_illegal" TestCases/hand_test_illegal.cpp)
     add_executable("challenger_test" TestCases/challenger_test.cpp)
     add_executable("dealer_test" TestCases/dealer_test.cpp)
+    add_executable("players_test" TestCases/players_test.cpp)
 
     # Add required libraries and include directories
     target_include_directories(${projectName} PRIVATE "." "include" $ENV{CADMIUM})
@@ -50,6 +51,7 @@ else()
     target_include_directories("hand_illegal" PRIVATE "." "include" $ENV{CADMIUM})
     target_include_directories("dealer_test" PRIVATE "." "include" $ENV{CADMIUM})
     target_include_directories("challenger_test" PRIVATE "." "include" $ENV{CADMIUM})
+    target_include_directories("players_test" PRIVATE "." "include" $ENV{CADMIUM})
 
     # Non-ESP32 specific compile options
     target_compile_options(${projectName} PUBLIC -std=gnu++2b)
@@ -63,4 +65,5 @@ else()
     target_compile_options("hand_illegal" PUBLIC -std=gnu++2b)
     target_compile_options("dealer_test" PUBLIC -std=gnu++2b)
     target_compile_options("challenger_test" PUBLIC -std=gnu++2b)
+    target_compile_options("players_test" PUBLIC -std=gnu++2b)
 endif()
