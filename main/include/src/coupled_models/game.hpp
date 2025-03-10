@@ -39,6 +39,7 @@ public:
         addCoupling(deckModel->dealerCardOutPort, playersModel->dealerIn);
         addCoupling(deckModel->hitOutPort, controllerModel->decisionInPort);
         addCoupling(playersModel->playerDecisionOut, controllerModel->decisionInPort);
+        addCoupling(playersModel->scoreOut, controllerModel->handValueInPort);
     }
 
 };
