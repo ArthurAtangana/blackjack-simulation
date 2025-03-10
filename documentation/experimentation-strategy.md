@@ -10,7 +10,9 @@ The game is responsible for starting a game and getting a winner
 - Receive a shuffle input -> the deck should be shuffled -> output HIT.
 - Receive a draw(player) input -> the deck should draw a card to a specific player -> deck = deck - 1
 ## Controller Model
-
+- Starts a game -> receive scores -> WIN
+- Starts a game -> receive scores -> LOSE
+- Starts a game -> receive scores -> TIE
 
 ## Players Model
 - receive a card -> if hand value too low -> HIT
