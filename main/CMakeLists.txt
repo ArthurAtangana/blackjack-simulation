@@ -3,16 +3,16 @@ if(ESP_PLATFORM)
     idf_component_register( SRCS "main.cpp"
                             REQUIRES driver
                             INCLUDE_DIRS "." "include" $ENV{CADMIUM})
-    idf_component_register( SRCS "deck_test.hpp"
+    idf_component_register( SRCS "TestCases/deck_test.cpp"
                             REQUIRES driver
                             INCLUDE_DIRS "." "include" $ENV{CADMIUM})
-    idf_component_register( SRCS "controller_lose_test.hpp"
+    idf_component_register( SRCS "TestCases/controller_lose_test.cpp"
                             REQUIRES driver
                             INCLUDE_DIRS "." "include" $ENV{CADMIUM})
-    idf_component_register( SRCS "controller_win_test.hpp"
+    idf_component_register( SRCS "TestCases/controller_win_test.cpp"
                             REQUIRES driver
                             INCLUDE_DIRS "." "include" $ENV{CADMIUM})
-    idf_component_register( SRCS "controller_tie_test.hpp"
+    idf_component_register( SRCS "TestCases/controller_tie_test.cpp"
                             REQUIRES driver
                             INCLUDE_DIRS "." "include" $ENV{CADMIUM})
 
@@ -27,10 +27,10 @@ else()
 
     # Regular CMake project setup for non-ESP32
     add_executable(${projectName} main.cpp)
-    add_executable("deck_test" deck_main.cpp)
-    add_executable("controller_lose_test" controller_lose_main.cpp)
-    add_executable("controller_win_test" controller_win_main.cpp)
-    add_executable("controller_tie_test" controller_tie_main.cpp)
+    add_executable("deck_test" TestCases/deck_main.cpp)
+    add_executable("controller_lose_test" TestCases/controller_lose_main.cpp)
+    add_executable("controller_win_test" TestCases/controller_win_main.cpp)
+    add_executable("controller_tie_test" TestCases/controller_tie_main.cpp)
 
     # Add required libraries and include directories
     target_include_directories(${projectName} PRIVATE "." "include" $ENV{CADMIUM})
