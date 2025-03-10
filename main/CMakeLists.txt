@@ -35,8 +35,11 @@ else()
     add_executable("threshold_d_test" TestCases/threshold_d_test.cpp)
     add_executable("hand_cumulative" TestCases/hand_test_cumulative.cpp)
     add_executable("hand_illegal" TestCases/hand_test_illegal.cpp)
+<<<<<<< HEAD
     add_executable("challenger_test" TestCases/challenger_test.cpp)
     add_executable("dealer_test" TestCases/dealer_test.cpp)
+=======
+>>>>>>> main
 
     # Add required libraries and include directories
     target_include_directories(${projectName} PRIVATE "." "include" $ENV{CADMIUM})
@@ -48,8 +51,11 @@ else()
     target_include_directories("threshold_d_test" PRIVATE "." "include" $ENV{CADMIUM})
     target_include_directories("hand_cumulative" PRIVATE "." "include" $ENV{CADMIUM})
     target_include_directories("hand_illegal" PRIVATE "." "include" $ENV{CADMIUM})
+<<<<<<< HEAD
     target_include_directories("dealer_test" PRIVATE "." "include" $ENV{CADMIUM})
     target_include_directories("challenger_test" PRIVATE "." "include" $ENV{CADMIUM})
+=======
+>>>>>>> main
 
     # Non-ESP32 specific compile options
     target_compile_options(${projectName} PUBLIC -std=gnu++2b)
@@ -61,6 +67,9 @@ else()
     target_compile_options("threshold_d_test" PUBLIC -std=gnu++2b)
     target_compile_options("hand_cumulative" PUBLIC -std=gnu++2b)
     target_compile_options("hand_illegal" PUBLIC -std=gnu++2b)
+<<<<<<< HEAD
     target_compile_options("dealer_test" PUBLIC -std=gnu++2b)
     target_compile_options("challenger_test" PUBLIC -std=gnu++2b)
+=======
+>>>>>>> main
 endif()
