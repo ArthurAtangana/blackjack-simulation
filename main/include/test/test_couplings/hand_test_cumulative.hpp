@@ -6,13 +6,12 @@
 #include "src/atomic_models/hand.hpp"
 #include "cadmium/lib/iestream.hpp"          //iestream header
 
-class handTest: public cadmium::Coupled {
+class handTestCumulative: public cadmium::Coupled {
 public:
-    handTest(const std::string& id) : Coupled(id) {
+handTestCumulative(const std::string& id) : Coupled(id) {
         // Create model instances
         auto handModel = addComponent<hand>("hand");
         auto mockModel = addComponent<lib::IEStream<int>>("hand input", "main/include/test/inputs/hand_inputs/hand_in_cumulative.txt");
-
 
         addCoupling(mockModel->out, handModel->cardIn);
     }
