@@ -7,7 +7,7 @@ enum class deckCommand {
     SHUFFLE,
     DRAW
 };
-// Overloads out << operator for output
+// Overloads out << operator for output deckCommand
 inline std::ostream& operator<<(std::ostream& out, const deckCommand& command) {
     switch (command) {
         case deckCommand::SHUFFLE: out << "SHUFFLE"; break;
@@ -16,7 +16,7 @@ inline std::ostream& operator<<(std::ostream& out, const deckCommand& command) {
     }
     return out;
 }
-// Overload the >> operator for input
+// Overload the >> operator for input deckCommand
 inline std::istream& operator>>(std::istream& in, deckCommand& command) {
     std::string value;
     in >> value;
@@ -40,6 +40,7 @@ enum class decision{
     STAND
 };
 
+// Overloads out << operator for output decision
 inline std::ostream& operator<<(std::ostream& out, const decision& command) {
     switch (command) {
         case decision::HIT: out << "HIT"; break;
@@ -49,6 +50,26 @@ inline std::ostream& operator<<(std::ostream& out, const decision& command) {
     return out;
 }
 
+// Overload the >> operator for input decision
+inline std::istream& operator>>(std::istream& in, decision& dec) {
+    std::string value;
+    in >> value;
+
+    static const std::unordered_map<std::string, decision> decisionMap = {
+        {"HIT", decision::HIT},
+        {"STAND", decision::STAND}
+    };
+
+    auto it = decisionMap.find(value);
+    if (it != decisionMap.end()) {
+        dec = it->second;
+    } else {
+        in.setstate(std::ios::failbit);  // Set fail state if invalid
+    }
+
+    return in;
+}
+
 enum class outcome{
     CONTINUE,
     WIN,
@@ -56,6 +77,7 @@ enum class outcome{
     TIE
 };
 
+// Overloads out << operator for output outcome
 inline std::ostream& operator<<(std::ostream& out, const outcome& o){
     switch (o) {
         case outcome::CONTINUE: out << "CONTINUE"; break;
@@ -65,6 +87,27 @@ inline std::ostream& operator<<(std::ostream& out, const outcome& o){
         defautl: out << "UNKNOWN OUTCOME"; break;
     }
     return out;
+}
+// Overload the >> operator for input outcome
+inline std::istream& operator>>(std::istream& in, outcome& outc) {
+    std::string value;
+    in >> value;
+
+    static const std::unordered_map<std::string, outcome> outcomeMap = {
+        {"CONTINUE", outcome::CONTINUE},
+        {"WIN", outcome::WIN},
+        {"LOSE", outcome::LOSE},
+        {"TIE", outcome::TIE}
+    };
+
+    auto it = outcomeMap.find(value);
+    if (it != outcomeMap.end()) {
+        outc = it->second;
+    } else {
+        in.setstate(std::ios::failbit);  // Set fail state if invalid
+    }
+
+    return in;
 }
 
 #endif

@@ -1,22 +1,10 @@
 #include <limits>
-#include "include/test/test_couplings/thresholdC_test.hpp"
-#include "include/test/test_couplings/thresholdD_test.hpp"
-#include "include/test/test_couplings/challenger_test.hpp"
-#include "include/test/test_couplings/dealer_test.hpp"
-#include "include/test/test_couplings/deck_test.hpp"
-#include "include/test/test_couplings/players_test.hpp"
-#include "include/test/test_couplings/hand_test.hpp"
-#include "include/src/coupled_models/challenger.hpp"
-#include "include/test/test_couplings/hand_test.hpp"
-#include "include/src/coupled_models/challenger.hpp"
-#include "include/test/test_couplings/hand_test.hpp"
-#include "include/src/coupled_models/challenger.hpp"
-#include "include/src/coupled_models/game.hpp"
+#include "include/test/test_couplings/controller_tie_test.hpp"
 
 /*
 There are 3 macros defined at compile time that changes the behaviour of the simulation.
 --> SIM_TIME: This macro, when defined, runs the simulation in simulation time. Else, the simulation runs at wall clock.
---> ESP_PLATFORM: When defined, the models are compiled for the ESP32 microcontroller. Else, compiles for Linux/ Windows
+--> ESP_PLATFORM: When defined, the models are compiled for the ESP32 microcontroller. Else, compiles for Linux/ tiedows
 --> NO_LOGGING: When defined, prevents logging (maybe useful in embedded situations)
 */
 
@@ -47,14 +35,7 @@ extern "C" {
 	#endif
 	{
 	
-		// auto model = std::make_shared<ThresholdTest> ("threshold_test");
-		// auto model = std::make_shared<handTest> ("hand_test");
-		// auto model = std::make_shared<challengerTest> ("challengerTest");
-		// auto model = std::make_shared<dealerTest> ("dealerTest");
-		// auto model = std::make_shared<deck_test> ("deck_test");
-		// auto model = std::make_shared<handTest> ("hand_test");
-		// auto model = std::make_shared<challenger> ("challenger");
-		auto model = std::make_shared<playersTest> ("players_test");
+		auto model = std::make_shared<controller_tie_test> ("controller_tie_test");
 
 		
 		#ifdef SIM_TIME
