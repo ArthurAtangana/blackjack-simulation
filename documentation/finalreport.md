@@ -2,7 +2,7 @@
 ## Model Specifications
 ### Atomic Models
 #### Controller
-![controller model](controller.png)
+![controller model](atomic_models/controller.png)
 
 ##### X - Inputs
 Start: Input to start the game. 
@@ -89,7 +89,7 @@ lambda(s) = \{\ &if\ s_4=HIT &then\ (DRAW, s_1, \_) \\
 \end{align}
 $$
 #### Deck
-![deck model](deck.png)
+![deck model](atomic_models/deck.png)
 
 ##### X - Inputs
 Inputs are composed of commands, and players (to specify who to draw for).
@@ -141,7 +141,7 @@ $$ \text{if}\ S_{\{\text{deck, shuffle}\}} \rightarrow (\_, \_, HIT)$$
 
 - draw(deck) returns any card remaining in the deck, equally weighted.
 #### Hand
-![hand model](hand.png)
+![hand model](atomic_models/hand.png)
 
 ##### X - Inputs
 The possible card ranks that can come into the hand:
@@ -198,7 +198,7 @@ $$
 ###### Output function
 $$ \lambda(s) = s_v + conv(s_c) $$ 
 #### Threshold
-![threshold model](threshold.png)
+![threshold model](atomic_models/threshold.png)
 
 ##### X - Inputs
 The inputs are the values that are intended to be compared with the internal threshold value. 
@@ -252,7 +252,7 @@ $$ \begin{align}
 
 ### Coupled Models
 #### Challenger
-![img](challenger.png)
+![img](coupled_models/challenger.png)
 ##### X - Input
 The player takes in cards, differentiated by the following ranks:
 $$ X = \{A,2,3,4,5,6,7,8,9,10,J,Q,K\} $$
@@ -283,7 +283,7 @@ something has gone wrong already.
 SELECT: ({hand, threshold}) = threshold
 
 #### Dealer
-![img](dealer.png)
+![img](coupled_models/dealer.png)
 ##### X - Input
 The dealer takes in cards, differentiated by the following ranks:
 $$ X = \{A,2,3,4,5,6,7,8,9,10,J,Q,K\} $$
@@ -314,7 +314,7 @@ something has gone wrong already.
 SELECT: ({hand, threshold}) = threshold
 
 #### Game
-![game](game.png)
+![game](coupled_models/game.png)
 ##### X - Input
 {start}
 ##### Y - Output
@@ -351,7 +351,7 @@ SELECT:
 - {controller, players, deck} = players
 
 #### Players
-![img](players.png)
+![img](coupled_models/players.png)
 ##### X - Input
 A player takes in cards, differentiated by the following ranks:
 $$ X = \{A,2,3,4,5,6,7,8,9,10,J,Q,K\} $$
