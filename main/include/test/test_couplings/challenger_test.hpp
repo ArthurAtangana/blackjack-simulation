@@ -12,7 +12,7 @@ public:
     challengerTest(const std::string& id) : Coupled(id) {
         // Create model instances
         auto challengerModel = addComponent<challenger>("challenger");
-        auto mockModel = addComponent<lib::IEStream<Cards>>("challenger in", "main/include/test/inputs/player_in/challenger_in.txt");
+        auto mockModel = addComponent<lib::IEStream<Cards>>("challenger in", "main/include/test/inputs/player_inputs/challenger_in.txt");
 
         addCoupling(mockModel->out, challengerModel->challengerCardIn);
     }

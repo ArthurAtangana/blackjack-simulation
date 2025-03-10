@@ -12,7 +12,7 @@ public:
     dealerTest(const std::string& id) : Coupled(id) {
         // Create model instances
         auto dealerModel = addComponent<dealer>("dealer");
-        auto mockModel = addComponent<lib::IEStream<Cards>>("dealer in", "main/include/test/inputs/player_in/dealer_in.txt");
+        auto mockModel = addComponent<lib::IEStream<Cards>>("dealer in", "main/include/test/inputs/player_inputs/dealer_in.txt");
 
         addCoupling(mockModel->out, dealerModel->dealerCardIn);
     }
