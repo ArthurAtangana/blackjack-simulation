@@ -13,9 +13,6 @@ The game is responsible for starting a game and getting a winner
 
 
 ## Players Model
-Players is just a way
-
-
 - receive a card -> if hand value too low -> HIT
 - receive a card -> if count at threshold -> STAND
 - receive a card -> if hand value >= threshold -> STAND
