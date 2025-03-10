@@ -1,5 +1,5 @@
 #include <limits>
-#include "include/test/test_couplings/deck_test.hpp"
+#include "include/test/test_couplings/thresholdD_test.hpp"
 
 /*
 There are 3 macros defined at compile time that changes the behaviour of the simulation.
@@ -35,7 +35,7 @@ extern "C" {
 	#endif
 	{
 	
-		auto model = std::make_shared<ThresholdDTest> ("threshold_d_test");
+		auto model = std::make_shared<ThresholdDTest>("threshold_d_test");
 
 		
 		#ifdef SIM_TIME
