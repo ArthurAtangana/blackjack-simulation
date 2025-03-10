@@ -1,4 +1,7 @@
 # Scripts
+## players_test
+Tests the players composite model with interweaving dealer/challenger inputs, as per the experimental strategy description.
+
 ## dealer_test
 Tests the entire dealer component, as per the experimental strategy description.
 
