@@ -1,5 +1,11 @@
 # Scripts
 
+## challenger_threshold
+Tests the threshold component for the challenger (threshold-c, set threshold of 15), as per the experimental strategy description.
+
+## dealer_threshold
+Tests the threshold component for the dealer (threshold-d, set threshold of 17), as per the experimental strategy description.
+
 ## controller_lose
 This encapsulates the test frame in which the CHALLENGER loses the game.
 Demonstrated by rigging the inputs taken from the controller to give the edge to the DEALER.
