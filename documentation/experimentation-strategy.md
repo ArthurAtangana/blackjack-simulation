@@ -13,9 +13,6 @@ The game is responsible for starting a game and getting a winner
 
 
 ## Players Model
-Players is just a way
-
-
 - receive a card -> if hand value too low -> HIT
 - receive a card -> if count at threshold -> STAND
 - receive a card -> if hand value >= threshold -> STAND
@@ -43,6 +40,9 @@ Hand has a conversion function, need to test that it stores and outputs the righ
     - Inputs (in order) should be: {A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K}
     - Outputs (in order) should be: 1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 65, 75, 85.
     - Limitations: Only testing this assumes a different order will show the same intended behaviour.
+2. Test Illegal input NO_CARD. Assume it's a 0 card
+   - Inputs: NO_CARD, ACE, NO_CARD 
+   - Output: 0, 1, 1
 ## Threshold Model
 Threshold has a threshold constant variable (in state). It can take in values to compare against it.
 There is no persistence. There are two output types (HIT/STAND), but it also appends the input value if it STANDs.

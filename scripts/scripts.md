@@ -1,4 +1,15 @@
 # Scripts
+## hand_cumulative
+Tests the hand component with a cumulative input, as per the first test in the experimental strategy description.
+
+## hand_illegal
+Tests the hand component with a illegal inputs, as per the second test in the experimental strategy description.
+
+## challenger_threshold
+Tests the threshold component for the challenger (threshold-c, set threshold of 15), as per the experimental strategy description.
+
+## dealer_threshold
+Tests the threshold component for the dealer (threshold-d, set threshold of 17), as per the experimental strategy description.
 
 ## challenger_threshold
 Tests the threshold component for the challenger (threshold-c, set threshold of 15), as per the experimental strategy description.

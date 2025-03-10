@@ -41,4 +41,36 @@ inline std::ostream& operator<<(std::ostream& out, const Cards& command) {
     return out;
 }
 
+// Overload the >> operator for input deckCommand
+inline std::istream& operator>>(std::istream& in, Cards& command) {
+    std::string value;
+    in >> value;
+
+    static const std::unordered_map<std::string, Cards> commandMap = {
+        {"NO_CARD", Cards::NO_CARD},
+        {"ACE", Cards::ACE},
+        {"TWO", Cards::TWO},
+        {"THREE", Cards::THREE},
+        {"FOUR", Cards::FOUR},
+        {"FIVE", Cards::FIVE},
+        {"SIX", Cards::SIX},
+        {"SEVEN", Cards::SEVEN},
+        {"EIGHT", Cards::EIGHT},
+        {"NINE", Cards::NINE},
+        {"TEN", Cards::TEN},
+        {"JACK", Cards::JACK},
+        {"QUEEN", Cards::QUEEN},
+        {"KING", Cards::KING}
+    };
+
+    auto it = commandMap.find(value);
+    if (it != commandMap.end()) {
+        command = it->second;
+    } else {
+        in.setstate(std::ios::failbit);  // Set fail state if invalid
+    }
+
+    return in;
+}
+
 #endif
