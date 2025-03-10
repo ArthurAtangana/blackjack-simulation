@@ -22,6 +22,7 @@
  (deck.dealerOut,player.dealerIn),
  (deck.hitOut,controller.decision),
  (players.decision,controller.decision),
+ (players.scoreOut,controller.scoreIn),
 }
 
 ## Select:
