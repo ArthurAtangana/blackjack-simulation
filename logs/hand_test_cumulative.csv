@@ -1,0 +1,71 @@
+sep=;
+time;model_id;model_name;port_name;data
+0;1;hand input;;1
+0;2;hand;;{value: 0, card: NO CARD}
+1;1;hand input;out;A
+1;1;hand input;;1
+1;2;hand;;{value: 0, card: A}
+1.1;2;hand;handValueOut;1
+1.1;2;hand;;{value: 1, card: NO CARD}
+2;1;hand input;out;2
+2;1;hand input;;1
+2;2;hand;;{value: 1, card: 2}
+2.1;2;hand;handValueOut;3
+2.1;2;hand;;{value: 3, card: NO CARD}
+3;1;hand input;out;3
+3;1;hand input;;1
+3;2;hand;;{value: 3, card: 3}
+3.1;2;hand;handValueOut;6
+3.1;2;hand;;{value: 6, card: NO CARD}
+4;1;hand input;out;4
+4;1;hand input;;1
+4;2;hand;;{value: 6, card: 4}
+4.1;2;hand;handValueOut;10
+4.1;2;hand;;{value: 10, card: NO CARD}
+5;1;hand input;out;5
+5;1;hand input;;1
+5;2;hand;;{value: 10, card: 5}
+5.1;2;hand;handValueOut;15
+5.1;2;hand;;{value: 15, card: NO CARD}
+6;1;hand input;out;6
+6;1;hand input;;1
+6;2;hand;;{value: 15, card: 6}
+6.1;2;hand;handValueOut;21
+6.1;2;hand;;{value: 21, card: NO CARD}
+7;1;hand input;out;7
+7;1;hand input;;1
+7;2;hand;;{value: 21, card: 7}
+7.1;2;hand;handValueOut;28
+7.1;2;hand;;{value: 28, card: NO CARD}
+8;1;hand input;out;8
+8;1;hand input;;1
+8;2;hand;;{value: 28, card: 8}
+8.1;2;hand;handValueOut;36
+8.1;2;hand;;{value: 36, card: NO CARD}
+9;1;hand input;out;9
+9;1;hand input;;1
+9;2;hand;;{value: 36, card: 9}
+9.1;2;hand;handValueOut;45
+9.1;2;hand;;{value: 45, card: NO CARD}
+10;1;hand input;out;10
+10;1;hand input;;1
+10;2;hand;;{value: 45, card: 10}
+10.1;2;hand;handValueOut;55
+10.1;2;hand;;{value: 55, card: NO CARD}
+11;1;hand input;out;J
+11;1;hand input;;1
+11;2;hand;;{value: 55, card: J}
+11.1;2;hand;handValueOut;65
+11.1;2;hand;;{value: 65, card: NO CARD}
+12;1;hand input;out;Q
+12;1;hand input;;1
+12;2;hand;;{value: 65, card: Q}
+12.1;2;hand;handValueOut;75
+12.1;2;hand;;{value: 75, card: NO CARD}
+13;1;hand input;out;K
+13;1;hand input;;inf
+13;2;hand;;{value: 75, card: K}
+13.1;2;hand;handValueOut;85
+13.1;2;hand;;{value: 85, card: NO CARD}
+13.1;1;hand input;;inf
+13.1;2;hand;;{value: 85, card: NO CARD}
