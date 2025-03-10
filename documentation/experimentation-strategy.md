@@ -13,9 +13,10 @@ The game is responsible for starting a game and getting a winner
 
 
 ## Players Model
-- receive a card -> if hand value too low -> HIT
-- receive a card -> if count at threshold -> STAND
-- receive a card -> if hand value >= threshold -> STAND
+Make sure that cards can be directed to the right player (regardless of order), and they still behave the same as they did isolated.
+1. Interweave test
+   - Use inputs from dealer, challenger tests defined below but alternate their sent timings.
+   - Inputs from Challenger should go on challengerIn port, dealer on DealerIn
 
 ## Dealer Model
 The dealer is supposed to have a set threshold of 17, 
