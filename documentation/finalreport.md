@@ -16,14 +16,14 @@
 ![blackjack model](model.png)
 
 ### Component Description
-- **Blackjack**: The component representing the game itself. It contains Deck, Game Controller, and Players components.
+- **Game**: The component representing the game itself. It contains Deck, Game Controller, and Players components.
 - **Deck**: Has the cards of the game, can be shuffled and distributes cards one at a time.
-- **Game Controller**: Keeps track of the game states, who is playing and who wins at the end.
-- **Players**: A coupled model of all players in the game, including the dealer and the regular player.
-- **Dealer**: The dealer of the game, follows special rules compared to normal players. Has a Hand and Threshold atomic model.
-- **Regular Player**: Draws cards to reach a total up to 21. Can decide to stop drawing cards ending its turn. Has a Hand and Threshold atomic model.
+- **Controller**: Keeps track of the game states, who is playing and who wins at the end.
+- **Players**: A coupled model of all players in the game, including the dealer and the challenger.
+- **Dealer**: The dealer of the game, follows special rules compared to normal players. Has a Hand and Threshold atomic model (threshold = 17).
+- **Challenger**: Draws cards to reach a total up to 21. Can decide to stop drawing cards ending its turn. Has a Hand and Threshold atomic model (threshold = 15).
 - **Hand**: Holds the hand of a specific player, receives a card and outputs the current hand value.
-- **Threshold**: The decision making model, takes in the current hand value and chooses to HIT or STAND (stop drawing) depending on a threshold value. The dealer’s threshold is fixed, while other players may vary.
+- **Threshold**: The decision making model, takes in the current hand value and chooses to HIT or STAND (stop drawing) depending on a threshold value. The dealer’s threshold is fixed to 17, while other players can choose (set to 15 in our model for the Challenger).
 
 ## DEVS Formal Specifications
 ### Atomic Models
@@ -58,11 +58,11 @@ $$ command \in \{SHUFFLE, DRAW\}$$
 $$ player \in \{CHALLENGER, DEALER\}$$
 $$ outcome \in \{WIN, TIE, LOSS\}$$
 
-##### $\delta$<sub>int</sub> - Internal transitions
-The internal transition behaviour is strongly dependent on the value in $s_4$, 
+##### $\delta_{int}$ - Internal transitions
+The internal transition behaviour is strongly dependent on the value in $s_4$,
 therefore we define $\delta_{int}$ based on it. Note, $s_4$ = IDLE is ignored because of its infinite ta value.
 
-##### Check Winner function
+###### Check Winner function
 This function compares the internal state to determine the game winner.
 Note: CONTINUE indicates no winner, game should continue.
 $$ \begin{align}
@@ -77,7 +77,7 @@ check\_winner(chal, deal) = \{\
 \end{align}
 $$
 
-##### $\delta_{int}$
+###### $\delta_{int}$
 $$ \delta_{int}(\_, \_, \_, START) = (CHALLENGER, 0, 0, IDLE)$$
 $$ \delta_{int}(s1, s2, s3, HIT) = (s1, s2, s3, IDLE)$$
 $$ \delta_{int}(\_, \_, \_, STAND) = \{if\ check\_winner(s2, s3) != CONTINUE\ then\ (s1, s2, s3, IDLE)\ else\ (DEALER, s2, s3, HIT)\}$$
@@ -90,7 +90,7 @@ We ignore inputs if there already is an input to process, although this should n
 It is probably an error in the model in that case.
 
 $$ \delta_{ext}((1, \_, \_), (s1,s2,s3,s4))= (s1,s2,s3,SHUFFLE)$$
-$$ \delta_{ext}((0, HIT, _), (s1,s2,s3,s4))= (s1,s2,s3,HIT)$$
+$$ \delta_{ext}((0, HIT, \_), (s1,s2,s3,s4))= (s1,s2,s3,HIT)$$
 $$ \delta_{ext}((0, STAND, value), (CHALLENGER,s2,s3,s4))= (s1,value,s3,STAND)$$
 $$ \delta_{ext}((0, STAND, value), (DEALER,s2,s3,s4))= (s1,s2,value,STAND)$$
 
@@ -111,7 +111,7 @@ Note: _ indicates no output for that port
 $$ \begin{align}
 lambda(s) = \{\ &if\ s_4=HIT &then\ (DRAW, s_1, \_) \\
 & if\ s_4=START &then\ (SHUFFLE, \_, \_)  \\
-& if\ s_4=CHECK\_WINNER\ &then\ (\_, \_, check\_winner(s2, s3))\} 
+& if\ s_4=CHECK\_WINNER\ &then\ (\_, \_, check\_winner(s2, s3))\}
 \end{align}
 $$
 #### Deck
@@ -127,7 +127,7 @@ Command description:
 - DRAW: draw one card in the deck, for the given player (p).
 ##### S - States
 
-$$ S = \{(\text{deck, action})\ |\ \text{deck} \subseteq D, 
+$$ S = \{(\text{deck, action})\ |\ \text{deck} \subseteq D,
 \text{active} \in \{\text{idle, draw_challenger, draw_dealer,  shuffle}\}\} $$
 
 - deck: the list of remaining cards
@@ -158,8 +158,8 @@ $$ \text{if}\ S_{\{\text{deck, shuffle}\}} \rightarrow \tau_a = 10s $$
 
 ##### $\lambda$ - Output function
 The draw outputs encode the player to send the card to first, then the card drawn (returned by the drawing function).
-When the deck is shuffled, the deck model communicates back to draw immediately from it. 
-Note: _ used to show that nothing is set on that output port. 
+When the deck is shuffled, the deck model communicates back to draw immediately from it.
+Note: _ used to show that nothing is set on that output port.
 
 $$ \text{if}\ S_{\{\text{deck, draw_challenger}\}} \rightarrow (\_, draw(deck), \_)$$
 $$ \text{if}\ S_{\{\text{deck, draw_dealer}\}} \rightarrow (draw(deck), \_, \_)$$
@@ -181,7 +181,7 @@ $$v \in \mathbb{N} \cap [1, 30]$$
 $$c \in X \cup\{0\}$$
 
 ##### Y - Outputs
-The output is $s'_v$ (see output function / internal transition), 
+The output is $s'_v$ (see output function / internal transition),
 the addition of the card value and the current stored. It follows that it has the same domain as v.
 $$ Y = \{(v)\} \quad
 v \in \mathbb{N} \cap [1, 30]$$
@@ -211,28 +211,28 @@ ta = compute_time = 0.1s + variation
 ##### $\lambda$ - Output function
 
 ###### Card Conversion function
-There are cards which have their ranks as numbers, 
+There are cards which have their ranks as numbers,
 but there are also special cards which need to be converted to a numerical value.
 This function captures this part of the output function process.
 $$ \begin{align}
-    conv(c) = \{\ &if\ A &then\ 1 \\
-    & if\ (J\ or\ Q\ or\ K) &then\ 10 \\
-    & else &then \ c \} \\
-    \end{align}
+conv(c) = \{\ &if\ A &then\ 1 \\
+& if\ (J\ or\ Q\ or\ K) &then\ 10 \\
+& else &then \ c \} \\
+\end{align}
 $$
 
 ###### Output function
-$$ \lambda(s) = s_v + conv(s_c) $$ 
+$$ \lambda(s) = s_v + conv(s_c) $$
 #### Threshold
 ![threshold model](atomic_models/threshold.png)
 
 ##### X - Inputs
-The inputs are the values that are intended to be compared with the internal threshold value. 
+The inputs are the values that are intended to be compared with the internal threshold value.
 The max is 30 in the case that the hand has 20, and gets a 10 value card.
 $$ X = x \in \mathbb{N} \cap [1, 30]$$
 
 ##### S - States
-Threshold states are tuples composed of two values: (t, v). t is the threshold value set by the component, static. 
+Threshold states are tuples composed of two values: (t, v). t is the threshold value set by the component, static.
 v is the comparison value it receives as an input (+0 for the idle state). Their domain is specified as follows:
 
 $$ S = \{(t,v)\} $$
@@ -258,8 +258,8 @@ $$ \delta_{ext}(v, s)= (s_t,\ v)$$
 Note: $s_t$ refers to the threshold value component of the current state.
 
 ##### ta - Time advance function
-There are two state categories the time advance cares about: There is an input to evaluate, or there isn't. 
-If there is, take a decision (think time, around 0.1 seconds), otherwise, do nothing. 
+There are two state categories the time advance cares about: There is an input to evaluate, or there isn't.
+If there is, take a decision (think time, around 0.1 seconds), otherwise, do nothing.
 Note: "_" refers to any value (don't care value), we do not need this value to evaluate ta.
 
 ###### s = (_, 0)
@@ -268,13 +268,13 @@ ta = infinite
 ta = think_time = 0.1s + variation
 
 ##### $\lambda$ - Output function
-Ignore when v = 0, infinite ta. When the value meets the threshold (or above), take the decision to STAND. 
+Ignore when v = 0, infinite ta. When the value meets the threshold (or above), take the decision to STAND.
 Otherwise, keep hitting (HIT).
 
 $$ \begin{align}
 \lambda(s) =\ & \{ if  &s_t > s_v & \quad then\ (HIT, 0) \\
 &\ else && \quad then \ (STAND, s_v)
-\end{align}$$ 
+\end{align}$$
 
 ### Coupled Models
 #### Challenger
@@ -303,7 +303,7 @@ IC = {hand.handValueOut->threshold.valueIn}
 
 ##### Select
 It's better to take the decision of the previous turn first before processing the updated hand.
-That said, you should never be drawing before your turn is ended so if this happens in simulation 
+That said, you should never be drawing before your turn is ended so if this happens in simulation
 something has gone wrong already.
 
 SELECT: ({hand, threshold}) = threshold
@@ -357,19 +357,19 @@ SELECT: ({hand, threshold}) = threshold
 
 ##### IC - Internal Couplings
 {
- (controller.cmd,deck.cmd),
- (controller.player,deck.player),
- (deck.challengerOut,player.challengerIn),
- (deck.dealerOut,player.dealerIn),
- (deck.hitOut,controller.decision),
- (players.decision,controller.decision),
+(controller.cmd,deck.cmd),
+(controller.player,deck.player),
+(deck.challengerOut,player.challengerIn),
+(deck.dealerOut,player.dealerIn),
+(deck.hitOut,controller.decision),
+(players.decision,controller.decision),
 }
 
 ##### Select:
 - It's better to take the decision of the previous turn first before processing the updated hand.
 - That said, you should never be drawing before your turn is ended so if this happens in simulation something has gone wrong already.
 
-SELECT: 
+SELECT:
 - {controller, deck} = deck
 - {controller, players} = players
 - {deck, players} = players
@@ -400,10 +400,10 @@ EOC = {(challenger.decision, players.decision), (dealer.decision, players.decisi
 (players.dealerIn, dealer.cardIn), (players.challengerIn, challenger.cardIn)}
 
 ##### IC - Internal Couplings
-IC = $\emptyset$ 
+IC = $\emptyset$
 
 ##### Select
-Normally, player is supposed to take their turn first so they have priority. 
+Normally, player is supposed to take their turn first so they have priority.
 They're also supposed to take their turns sequentially, in a mutually exclusive manner.
 This means if SELECT is needed there is likely an error in the simulation.
 
