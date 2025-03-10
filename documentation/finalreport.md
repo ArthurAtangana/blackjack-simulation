@@ -6,7 +6,12 @@
 | Arthur Atangana | 101005197 |
 | Alexandre Marques | 1234 |
 ## Execution Instruction
-TODO
+1. Precondition: Cadmium v2 is installed on the system. Otherwise, look at: Cadmium v2 install manual
+2. Clone repo: 
+```` https://github.com/ArthurAtangana/blackjack-simulation.git ````
+3. Build, by executing: ````build_sim.sh````
+4. Run simulation, by executing: ````scripts/game.sh````
+5. Run other submodel tests (if desired), by executing other scripts in the "scripts" folder. Read scripts.md to see the purpose of each script. 
 
 ## BlackJack Conceptual Model
 ### Problem Description
