@@ -22,25 +22,19 @@ Players is just a way
 
 ## Dealer Model
 The dealer is supposed to have a set threshold of 17, 
-it is the only difference between them and the challenger. 
 Mostly a repeat of the challenger tests, with a set threshold of 17. 
-
 1. Threshold test:
-   1. (Threshold hardcoded to 17 for dealer)
-   2. Inputs: 7, K
-   3. Outputs: HIT, STAND_17
+   1. Theshold is set to 17
+   2. Inputs: 7, 9, A, A
+   3. Outputs: (HIT, _), (HIT, _), (STAND, 17), (STAND, 18)
+
 ## Challenger Model
-A coupling of hand and threshold, with the limitation that the threshold cannot be more than 21.
-This implicitly limits hand value to 30, thus the final score to 30. 
+A coupling of hand and threshold, with the limitation that the threshold is set to 15.
 Without the controller coupling yet, nothing prevents us from sending more inputs after the STAND.
-1. Threshold test (21):
-   1. Set threshold to 21
-   2. Inputs: 2, 3, 5, 10, K, A
-   3. Outputs: HIT, HIT, HIT, HIT, STAND_30, STAND_31
-2. Threshold test (1):
-   1. Set threshold to 1
-   2. Inputs: A, A, 3, 5, 10, K, A
-   3. Outputs: STAND_1, STAND_2, STAND_5, STAND_10, STAND_20, STAND_30, STAND_31
+1. Threshold test:
+   1. Set threshold to 15
+   2. Inputs: 2, 3, 5, 5, 5, K, A
+   3. Outputs: (HIT, _), (HIT, _), (HIT, _), (STAND, 15), (STAND, 20), (STAND, 30), (STAND, 31)
 
 ## Hand Model
 Hand has persistent cumulative state, need to test a series of inputs to see how it behaves.
@@ -52,9 +46,18 @@ Hand has a conversion function, need to test that it stores and outputs the righ
 ## Threshold Model
 Threshold has a threshold constant variable (in state). It can take in values to compare against it.
 There is no persistence. There are two output types (HIT/STAND), but it also appends the input value if it STANDs.
-1. Comparison + no persistence test:
-   1. Threshold initialized to 18
-   2. in: 18 out: STAND_18
-   3. in: 10  out: HIT
-   4. in: 44 out: STAND_44
-   5. in: 22 out: STAND_22
+1. Threshold-C:
+   1. Threshold initialized to 15
+   2. in: 15 out: STAND, 15
+   5. in: 16 out: STAND, 16
+   5. in: 14 out: HIT, _
+   3. in: 1  out: HIT, _
+   4. in: 44 out: STAND, 44
+
+2. Theshold-D:
+   1. Threshold initialized to 17
+   2. in: 17 out: STAND, 17
+   5. in: 18 out: STAND, 18
+   5. in: 16 out: HIT, _
+   3. in: 1  out: HIT, _
+   4. in: 44 out: STAND, 44
