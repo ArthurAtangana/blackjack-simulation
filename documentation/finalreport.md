@@ -435,7 +435,18 @@ The game is responsible for starting a game and getting a winner
 - Receive a shuffle input -> the deck should be shuffled -> output HIT.
 - Receive a draw(player) input -> the deck should draw a card to a specific player -> deck = deck - 1
 #### Controller Model
-TODO: ARTHUR
+To test the controller we will try to verify the following properties:
+
+1. Send START on start port, output shuffle
+2. Send HIT on decision port, output (DRAW, player)
+   - player = challenger initially
+   - After a STAND input is given at any time in the test, player is now DEALER 
+3. Send (STAND, score), twice in a test case
+   - If score1 > 21, should give LOSE outcome
+   - else If score2 < 21, should give WIN outcome
+   - else If score1 > score2, should give WIN outcome
+   - else If score1 < score2, should give LOSE outcome
+   - else (both scores are equal) should give TIE outcome
 
 #### Players Model
 Make sure that cards can be directed to the right player (regardless of order), and they still behave the same as they did isolated.
